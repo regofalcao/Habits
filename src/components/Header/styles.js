@@ -14,5 +14,12 @@ export const Container = styled.header`
 
   svg {
     margin-right: 25px;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 900px) {
+    svg {
+      display: none;
+    }
   }
 `;

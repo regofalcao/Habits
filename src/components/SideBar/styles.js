@@ -9,7 +9,7 @@ export const Container = styled.aside`
 
   section {
     margin-top: 20px;
-    width: inherit;
+    width: 90%;
     display: flex;
     margin-left: 12px;
     gap: 10px;
@@ -23,6 +23,7 @@ export const Container = styled.aside`
     h2 {
       text-transform: capitalize;
       font-size: 20px;
+      font-weight: 600;
       color: #fbf7ec;
     }
   }
@@ -39,12 +40,13 @@ export const Container = styled.aside`
 
     li {
       color: #fbf7ec;
-      width: inherit;
+      width: 95%;
+      max-width: 185px;
       max-height: 40px;
       display: flex;
       justify-content: flex-start;
-      margin-left: 15px;
-      gap: 8px;
+      margin-left: 12px;
+      gap: 5px;
       align-items: center;
 
       svg {
@@ -65,6 +67,7 @@ export const Container = styled.aside`
         font-size: 18px;
         border-bottom: 2px solid transparent;
         cursor: pointer;
+        width: none;
 
         &:hover {
           border-bottom: 2px solid #fbf7ec;
@@ -74,6 +77,28 @@ export const Container = styled.aside`
   }
 
   @media screen and (min-width: 900px) {
-    align-self: flex-start;
+    display: none;
+  }
+`;
+
+export const ContainerDesk = styled(Container)`
+  align-self: flex-start;
+  display: none;
+
+  ul {
+    max-width: 208px;
+
+    li {
+      align-items: center;
+
+      a {
+        box-sizing: border-box;
+        height: 30px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    display: block;
   }
 `;
