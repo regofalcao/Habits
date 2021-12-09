@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -12,7 +12,7 @@ ReactDOM.render(
     <BrowserRouter>
       {/* <Providers> */}
       <App />
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -22,7 +22,7 @@ ReactDOM.render(
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
       {/* </Providers> */}
     </BrowserRouter>
   </React.StrictMode>,
