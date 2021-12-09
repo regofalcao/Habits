@@ -1,7 +1,7 @@
 import { Container } from "./styles";
 
-const Header = () => {
+const SideBar = () => {
   return <Container></Container>;
 };
 
-export default Header;
+export default SideBar;
