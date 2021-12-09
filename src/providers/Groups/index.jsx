@@ -144,7 +144,7 @@ export const GroupsProvider = ({ children }) => {
 
   const subscribeToAgroup = (groupId) => {
     api
-      .post(`/groups/${groupId}`, {
+      .post(`/groups/${groupId}/subscribe`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -164,7 +164,7 @@ export const GroupsProvider = ({ children }) => {
   };
   const unsubscribeToAgroup = (groupId) => {
     api
-      .delete(`/groups/${groupId}`, {
+      .delete(`/groups/${groupId}/unsubscribe`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

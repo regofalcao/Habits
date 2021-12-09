@@ -28,7 +28,8 @@ export const GoalsProvider = ({ children }) => {
         const groupGoals = response.data;
 
         setGoalsList(groupGoals);
-      });
+      })
+      .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };
 
   const createGoal = (data, groupId) => {
@@ -57,7 +58,7 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => toast.error("Não foi possível criar a meta"));
   };
 
-  const updateGoal = (goalId) => {
+  const updateGoal = (goalId, groupId) => {
     api
       .patch(`/goals/${goalId}/`, {
         headers: {
@@ -65,7 +66,7 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        getGoals();
+        getGoals(groupId);
         toast.success("Meta atualizada");
       })
       .catch((err) => {
@@ -86,7 +87,7 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        getGoals();
+        setGoalsList(goalsList.map((goal) => goal.id !== goalId));
         toast.success("Meta deletada");
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
