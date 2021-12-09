@@ -1,25 +1,25 @@
 import { useState, createContext, useContext } from "react";
 import { toast } from "react-toastify";
-
 import { useAuth } from "../Auth";
 
 import api from "../../services/api";
 
 const GroupsContext = createContext({});
 
-const useGroups = () => {
+export const useGroups = () => {
   const context = useContext(GroupsContext);
 
   return context;
 };
 
-const GroupsProvider = ({ children }) => {
+export const GroupsProvider = ({ children }) => {
   const { token } = useAuth();
 
   const [groupsList, setGroupsList] = useState([]);
   const [myGroupsList, setMyGroupsList] = useState([]);
-  const [nextPage, setNextPage] = useState("");
-  const [previousPage, setPreviousPage] = useState("");
+  const [searchList, setSearchList] = useState([]);
+  const [nextPage] = useState("");
+  const [previousPage] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
 
   const getMyGroups = () => {
@@ -53,10 +53,37 @@ const GroupsProvider = ({ children }) => {
     }
   };
 
-  const searchGroups = () => {};
+  const searchGroups = (string) => {
+    api
+      .get(`/groups/search=${string}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const searchList = response.data;
 
-  const searchGroupCategory = () => {};
-  const getGroupsList = () => {
+        setSearchList(searchList);
+      })
+      .catch((err) => toast.error("Ocorreu um erro na solicitação"));
+  };
+
+  const searchGroupCategory = (category) => {
+    api
+      .get(`/groups/category=${category}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const searchList = response.data;
+
+        setSearchList(searchList);
+      })
+      .catch((err) => toast.error("Ocorreu um erro na solicitação"));
+  };
+
+  const getGroupsList = (pageNumber) => {
     api
       .get(`/groups/page=${pageNumber}`, {
         headers: {
@@ -70,10 +97,112 @@ const GroupsProvider = ({ children }) => {
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };
-  const createGroup = () => {};
-  const editGroup = () => {};
-  const subscribeToAgroup = () => {};
-  const unsubscribeToAgroup = () => {};
 
-  return <GroupsContext.Provider value={{}}>{children}</GroupsContext.Provider>;
+  const createGroup = (data) => {
+    api
+      .post("/groups/", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const newGroup = response.data;
+        const newGroupsList = [...myGroupsList, newGroup];
+
+        localStorage.setItem(
+          "@kenzieHabits:groups",
+          JSON.stringify(newGroupsList)
+        );
+        setMyGroupsList(newGroupsList);
+
+        getMyGroups();
+        toast.success("Grupo criado");
+      })
+      .catch((err) => toast.error("Não foi possível criar o grupo"));
+  };
+
+  const editGroup = (data, groupId) => {
+    api
+      .patch(`/groups/${groupId}/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        getMyGroups();
+        toast.success("Grupo atualizado!");
+      })
+      .catch((err) => {
+        const { message } = err;
+        if (message === "Only the group creator can update the group") {
+          toast.error("Erro! Apenas o criador do grupo pode o atualizar");
+        } else {
+          toast.error("Não foi possível atualizar o grupo");
+        }
+      });
+  };
+
+  const subscribeToAgroup = (groupId) => {
+    api
+      .post(`/groups/${groupId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        getMyGroups();
+        toast.success("Inscrição realizada");
+      })
+      .catch((err) => {
+        const { message } = err;
+        if (message === "User already on group") {
+          toast.error("Você já faz parte desse grupo");
+        } else {
+          toast.error("Ocorreu um erro na solicitação");
+        }
+      });
+  };
+  const unsubscribeToAgroup = (groupId) => {
+    api
+      .delete(`/groups/${groupId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        getMyGroups();
+        toast.success("Você saiu do grupo");
+      })
+      .catch((err) => {
+        const { message } = err;
+        if (message === "User not on group") {
+          toast.error("Erro! O usuário não faz parte deste grupo");
+        } else {
+          toast.error("Ocorreu um erro na solicitação");
+        }
+      });
+  };
+
+  return (
+    <GroupsContext.Provider
+      value={{
+        groupsList,
+        myGroupsList,
+        searchList,
+        pageNumber,
+        getMyGroups,
+        goToNextPage,
+        goToPreviousPage,
+        searchGroups,
+        searchGroupCategory,
+        getGroupsList,
+        createGroup,
+        editGroup,
+        subscribeToAgroup,
+        unsubscribeToAgroup,
+      }}
+    >
+      {children}
+    </GroupsContext.Provider>
+  );
 };
