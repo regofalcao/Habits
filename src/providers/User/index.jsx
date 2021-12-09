@@ -14,14 +14,29 @@ export const useUser = () => {
 
 export const UserProvider = ({ children }) => {
   const { token } = useAuth();
+
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@kenzieHabits:user")) || {}
   );
-  const [habitsList, setHabtisList] = useState(
+
+  const [myHabitsList, setMyHabitsList] = useState(
     JSON.parse(localStorage.getItem("@kenzieHabits:habits")) || []
   );
 
-  const getMyHabits = () => {};
+  const getMyHabits = () => {
+    api
+      .get("/habits/personal", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setMyHabitsList(response.data);
+      })
+      .catch((err) =>
+        toast.error("Não foi possível atualizar sua lista de hábitos")
+      );
+  };
 
   const createNewHabit = (data) => {
     const { id } = user;
@@ -37,11 +52,53 @@ export const UserProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => response.data)
-      .catch((err) => toast.error("Não foi possível criar o novo hábito"));
+      .then((response) => {
+        const newHabit = response.data;
+        const newHabitsList = [...myHabitsList, newHabit];
+
+        setMyHabitsList(newHabitsList);
+
+        localStorage.setItem(
+          "@kenzieHabits:habit",
+          JSON.stringify(newHabitsList)
+        );
+      })
+      .catch((err) =>
+        toast.error("Erro! Não foi possível criar o novo hábito")
+      );
   };
 
-  const deleteHabit = () => {};
+  const updateHabit = (data, habitId) => {
+    api
+      .patch(`/habits/${habitId}/`, data)
+      .then((response) => {
+        toast.success("Hábito atualizado!");
+        getMyHabits();
+      })
+      .catch((err) =>
+        toast.error("Erro! Não foi possível atualizar o hábito.")
+      );
+  };
 
-  const updateHabit = () => {};
+  const deleteHabit = (habitId) => {
+    api
+      .delete(`/habits/${habitId}`)
+      .then(toast.success("Removido!"))
+      .catch((err) => toast.error("Erro! Não foi possível deletar o hábito."));
+  };
+
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        myHabitsList,
+        getMyHabits,
+        createNewHabit,
+        updateHabit,
+        deleteHabit,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
