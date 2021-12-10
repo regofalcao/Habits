@@ -73,7 +73,7 @@ export const LeftSideContainer = styled.div`
 export const ActivitiesSection = styled.section`
   border: 1px solid var(--black);
   padding: 5px 12px;
-  min-height: 200px;
+  min-height: 30vh;
   margin-bottom: 1rem;
 `;
 
@@ -91,14 +91,13 @@ export const SectionTitle = styled.div`
 export const GoalsSection = styled.section`
   border: 1px solid var(--black);
   padding: 5px 12px;
-  min-height: 200px;
+  min-height: 30vh;
   margin-bottom: 1rem;
 `;
 
 export const MembersSection = styled.section`
   border: 1px solid var(--black);
   padding: 5px 12px;
-  min-height: 200px;
   margin-bottom: 1rem;
   display: none;
   @media screen and (min-width: 900px) {
