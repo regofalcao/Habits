@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 
-const Header = () => {
+export const Header = () => {
   const { setOpenSidebar, openSidebar } = useOpenSideBar();
 
   return (

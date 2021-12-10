@@ -1,17 +1,13 @@
+import Logo from "../../components/Logo";
 import { useHistory } from "react-router";
+import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import api from "../../services/api";
 import { toast } from "react-toastify";
 import { TextField } from "@mui/material";
 import { Div, Form, Button } from "./style";
-<<<<<<< HEAD
-
-import * as yup from "yup";
-import Logo from "../../components/Logo";
-import api from "../../services/api";
-=======
 import welcome from "../../assets/welcome.svg";
->>>>>>> feature/signup
 
 const Signup = () => {
   const history = useHistory();
