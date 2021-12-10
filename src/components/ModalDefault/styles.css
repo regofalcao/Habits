@@ -1,0 +1,4 @@
+.ReactModal__Content.ReactModal__Content--after-open {
+  background-color: red;
+  max-width: 350px;
+}
