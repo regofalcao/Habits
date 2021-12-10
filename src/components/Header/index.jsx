@@ -17,7 +17,3 @@ const Header = () => {
 };
 
 export default Header;
-
-{
-  /*onClick={() => setOpenSidebar(!openSidebar)}*/
-}
