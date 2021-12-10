@@ -10,9 +10,12 @@ export const useOpenSideBar = () => {
 
 export const OpenSideBarProvider = ({ children }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
 
   return (
-    <OpenSideBarContext.Provider value={{ openSidebar, setOpenSidebar }}>
+    <OpenSideBarContext.Provider
+      value={{ openSidebar, setOpenSidebar, isOwner, setIsOwner }}
+    >
       {children}
     </OpenSideBarContext.Provider>
   );

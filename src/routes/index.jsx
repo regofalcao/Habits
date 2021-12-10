@@ -18,7 +18,7 @@ const Routes = () => {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/groupsList" component={GroupsList} />
       <Route path="/myGroups" component={MyGroups} />
-      <Route path="/group" component={Group} />
+      <Route path="/group/:id" component={Group} />
     </Switch>
   );
 };

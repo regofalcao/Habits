@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.aside`
+  position: fixed;
   align-self: flex-end;
   width: 55vw;
   max-width: 208px;

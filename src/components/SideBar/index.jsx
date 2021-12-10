@@ -4,6 +4,7 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import JoinRightIcon from "@mui/icons-material/JoinRight";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 import { Link } from "react-router-dom";
 
@@ -12,7 +13,7 @@ import UserImage from "../../assets/user.svg";
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 const SideBar = () => {
-  const { openSidebar } = useOpenSideBar();
+  const { openSidebar, isOwner } = useOpenSideBar();
 
   console.log(openSidebar);
 
@@ -23,6 +24,7 @@ const SideBar = () => {
           <section>
             <img src={UserImage} alt="user" />
             <h2>Usuário</h2>
+            {isOwner && <VerifiedIcon sx={{ color: "#E6AF2E" }} />}
           </section>
           <ul>
             <li>
@@ -48,6 +50,7 @@ const SideBar = () => {
         <section>
           <img src={UserImage} alt="user" />
           <h2>Usuário</h2>
+          {isOwner && <VerifiedIcon sx={{ color: "#E6AF2E" }} />}
         </section>
         <ul>
           <li>
