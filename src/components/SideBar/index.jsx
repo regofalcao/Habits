@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 import UserImage from "../../assets/user.svg";
 
-import { useOpenSideBar } from "../../providers/openSideBar";
+import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 const SideBar = () => {
   const { openSidebar } = useOpenSideBar();

@@ -3,7 +3,7 @@ import Logo from "../Logo";
 
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { useOpenSideBar } from "../../providers/openSideBar";
+import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 const Header = () => {
   const { setOpenSidebar, openSidebar } = useOpenSideBar();
