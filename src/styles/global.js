@@ -25,6 +25,20 @@ time, mark, audio, video {
 	font-family: 'Satoshi', sans-serif;
 }
 
+
+:root{
+	--color-primary:#4348DE;
+	--color-secundary:#38C15D;
+	--color-tertiary:#C03838;
+	--bege:#FBF7EC;
+	--light-gray:#F5F5F5;
+	--gray:#8F8389;
+	--black:#1E1E24;
+	--pink:#F568F8;
+
+}
+
+
 body{
 	background-color:#FBF7EC;
 }
