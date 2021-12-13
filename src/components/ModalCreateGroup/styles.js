@@ -1,15 +1,22 @@
 import styled from "styled-components";
 
-import { TextField } from "@mui/material";
-
 export const Form = styled.form`
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   justify-content: space-around;
   width: 90%;
-  height: 460px;
+  height: 500px;
   margin-top: 20px;
+
+  input,
+  p,
+  textarea,
+  fieldset,
+  div,
+  label {
+    font-family: "Satoshi", sans-serif;
+  }
 
   h2 {
     font-weight: bold;
@@ -18,23 +25,29 @@ export const Form = styled.form`
   section {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-around;
     height: 100px;
   }
 `;
 
-export const Button = styled.button`
-  border: none;
-  border-radius: 10px;
-  background-color: ${(props) =>
-    props.greenColor ? "var(--color-secundary)" : "var(--color-tertiary)"};
-  padding: 5px 15px;
-  box-sizing: border-box;
-  font-weight: 600;
-  height: 45px;
-  width: 100%;
-  color: white;
-  cursor: pointer;
+export const TitleCategory = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 44px;
+
+  p {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+    text-align: left;
+    margin-top: 3px;
+    margin-right: 14px;
+    margin-bottom: 0;
+    margin-left: 14px;
+  }
 `;
 
 export const Header = styled.div`

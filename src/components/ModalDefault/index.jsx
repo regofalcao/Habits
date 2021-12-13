@@ -28,8 +28,6 @@ const ModalDefault = ({ isOpen, setIsOpen, children }) => {
           backgroundColor: "#fff",
           color: "#333",
           borderRadius: "8px",
-          // width: "690px",
-          // maxWidth: "700px",
           border: "none",
           padding: "35px 28px",
         },

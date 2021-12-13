@@ -2,21 +2,47 @@ import ModalDefault from "../ModalDefault";
 
 import { useOpenModal } from "../../providers/OpenModal";
 
-import { useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
+
+import { toast } from "react-toastify";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-import { Form, Button, Header, SectionButton } from "./styles";
+import { Form, Header, SectionButton, TitleCategory } from "./styles";
 
 import ButtonRadio from "../ButtonRadio";
+import SubmitButtons from "../SubmitButtons";
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const ModalAddGroup = () => {
+  const schema = yup.object().shape({
+    name: yup.string().required("Nome do grupo obrigatório"),
+    description: yup.string().required("Descrição do grupo obrigatória"),
+    category: yup
+      .string()
+      .required("Categoria do grupo obrigatória")
+      .nullable(),
+  });
+
   const { modalOpen, handleModal } = useOpenModal();
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
+    toast.success("Grupo criado com sucesso!");
+  };
 
   return (
     <ModalDefault isOpen={modalOpen} setIsOpen={handleModal}>
@@ -25,40 +51,54 @@ const ModalAddGroup = () => {
         <CloseIcon />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <TextField label="Nome do grupo" />
-        <TextField label="Descrição do grupo" multiline rows={4} />
-
-        <h3>Selecionar Categoria:</h3>
+        <TextField
+          {...register("name")}
+          label="Nome do grupo"
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
+        <TextField
+          {...register("description")}
+          label="Descrição do grupo"
+          multiline
+          rows={4}
+          error={!!errors.description}
+          helperText={errors.description?.message}
+        />
+        <TitleCategory>
+          <h3>Selecionar Categoria:</h3>
+          {!!errors.category && <p>{errors.category.message}</p>}
+        </TitleCategory>
         <section>
           <ButtonRadio
             register={register}
             text="Esporte"
-            name="categoria"
+            name="category"
             value="esporte"
           />
           <ButtonRadio
             register={register}
             text="Saúde"
-            name="categoria"
+            name="category"
             value="saude"
           />
           <ButtonRadio
             register={register}
             text="Lazer"
-            name="categoria"
+            name="category"
             value="lazer"
           />
           <ButtonRadio
             register={register}
             text="Trabalho"
-            name="categoria"
+            name="category"
             value="trabalho"
           />
         </section>
 
         <SectionButton>
-          <Button greenColor>Salvar alterações</Button>
-          <Button>Excluir</Button>
+          <SubmitButtons greenColor>Salvar alterações</SubmitButtons>
+          <SubmitButtons>Excluir</SubmitButtons>
         </SectionButton>
       </Form>
     </ModalDefault>

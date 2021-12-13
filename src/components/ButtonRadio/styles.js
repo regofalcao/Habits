@@ -25,7 +25,13 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     width: inherit;
-    transition: 0.1s ease-in-out;
+    transition: 0.1s;
+
+    &:hover {
+      transition: none;
+      border: 2px solid var(--black);
+      border-radius: 5px;
+    }
   }
 
   input:checked + label {
