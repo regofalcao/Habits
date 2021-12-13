@@ -61,6 +61,8 @@ export const Header = styled.div`
   }
 
   svg {
+    color: red;
+    cursor: pointer;
     color: #333;
   }
 `;

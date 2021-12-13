@@ -44,11 +44,13 @@ const ModalAddGroup = () => {
     toast.success("Grupo criado com sucesso!");
   };
 
+  const { setModalOpen } = useOpenModal();
+
   return (
     <ModalDefault isOpen={modalOpen} setIsOpen={handleModal}>
       <Header>
         <h2>Cadastrar Grupo</h2>
-        <CloseIcon />
+        <CloseIcon onClick={() => setModalOpen(false)} />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextField
