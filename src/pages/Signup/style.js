@@ -5,8 +5,20 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #e5e5e5;
+  background-color: #fbf7ec;
   height: 90vh;
+
+  img {
+    display: none;
+  }
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+    align-items: left;
+    img {
+      display: inline;
+    }
+  }
 `;
 export const Form = styled.form`
   display: flex;

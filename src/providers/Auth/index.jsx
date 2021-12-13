@@ -1,6 +1,5 @@
 import { useState, createContext, useContext } from "react";
 import { toast } from "react-toastify";
-
 import api from "../../services/api";
 import jwt_decode from "jwt-decode";
 import { useUser } from "../User";

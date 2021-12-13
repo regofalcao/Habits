@@ -1,0 +1,11 @@
+.ReactModal__Content.ReactModal__Content--after-open {
+  background-color: red;
+  max-width: 350px;
+}
+
+@media screen and (min-width: 900px) {
+  .ReactModal__Content.ReactModal__Content--after-open {
+    max-width: 600px;
+    width: 600px;
+  }
+}

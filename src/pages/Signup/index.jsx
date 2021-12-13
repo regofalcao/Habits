@@ -1,12 +1,14 @@
-import Logo from "../../components/Logo";
 import { useHistory } from "react-router";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../services/api";
 import { toast } from "react-toastify";
 import { TextField } from "@mui/material";
 import { Div, Form, Button } from "./style";
+import * as yup from "yup";
+import Logo from "../../components/Logo";
+import api from "../../services/api";
+import welcome from "../../assets/welcome.svg";
+
 const Signup = () => {
   const history = useHistory();
 
@@ -35,7 +37,7 @@ const Signup = () => {
     delete data.confirmPassword;
     api
       .post("users/", data)
-      .then(() => {
+      .then((response) => {
         toast.success("Registro Completo");
         return history.push("/login");
       })
@@ -70,6 +72,7 @@ const Signup = () => {
             {...register("password")}
             label="Senha"
             variant="outlined"
+            type="password"
             size="small"
             error={!!errors.password}
             helperText={errors.password?.message}
@@ -86,6 +89,7 @@ const Signup = () => {
           />
           <Button type="submit">Cadastrar</Button>
         </Form>
+        <img src={welcome} width={708} height={500} alt="welcome-image"></img>
       </Div>
     </>
   );

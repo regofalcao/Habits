@@ -21,15 +21,15 @@ export const Title = styled.div`
 
   h1 {
     color: #4348de;
-    font-weight: 500;
+    font-weight: 550;
     font-size: 30px;
-    letter-spacing: 0.45rem;
+    letter-spacing: 0.35rem;
   }
 `;
 
 export const SecondaryTitle = styled.div`
   display: flex;
-  width: 104px;
+  width: 108px;
   align-items: center;
   justify-content: center;
   height: 30px;
@@ -43,7 +43,7 @@ export const SecondaryTitle = styled.div`
   h1 {
     color: #38c15d;
     font-size: 20px;
-    letter-spacing: 0.35rem;
+    letter-spacing: 0.25rem;
     font-weight: 600;
   }
 `;
