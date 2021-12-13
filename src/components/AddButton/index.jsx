@@ -8,6 +8,11 @@ const AddButton = () => {
     backgroundColor: "#11995E",
     width: 32,
     borderRadius: 1.5,
+    "&:hover": {
+      cursor: "pointer",
+      opacity: "85%",
+      transition: "opacity 0.5s",
+    },
   };
   return <AddIcon sx={style} />;
 };

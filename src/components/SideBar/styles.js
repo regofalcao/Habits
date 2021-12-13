@@ -8,9 +8,10 @@ export const Container = styled.aside`
   height: 100vh;
   z-index: 1;
   background-color: #4348de;
+  padding-top: 1rem;
 
   section {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     width: 90%;
     display: flex;
     margin-left: 12px;
