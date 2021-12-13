@@ -39,6 +39,11 @@ export const ButtonEdit = styled.button`
   border-radius: 5px;
   border: none;
   color: var(--white);
+  &:hover {
+    cursor: pointer;
+    opacity: 85%;
+    transition: opacity 0.5s;
+  }
 `;
 
 export const ButtonExcludeExit = styled.button`
@@ -51,6 +56,11 @@ export const ButtonExcludeExit = styled.button`
   border-radius: 5px;
   border: none;
   color: var(--white);
+  &:hover {
+    cursor: pointer;
+    opacity: 85%;
+    transition: opacity 0.5s;
+  }
 `;
 
 export const SectionContainer = styled.div`
@@ -77,10 +87,26 @@ export const ActivitiesSection = styled.section`
   margin-bottom: 1rem;
 `;
 
+export const ActivitiesCardDisplay = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  overflow-y: scroll;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 900px) {
+    flex-wrap: wrap;
+    overflow-y: unset;
+    justify-content: center;
+  }
+`;
+
 export const SectionTitle = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
+  margin-bottom: 1rem;
   h2 {
     flex-grow: 1;
     text-align: left;
@@ -103,7 +129,8 @@ export const MembersSection = styled.section`
   @media screen and (min-width: 900px) {
     display: flex;
     flex-grow: 1;
-    max-width: 25vw;
+    width: 25vw;
+    min-width: 25vw;
     margin-right: 5vw;
   }
 `;
