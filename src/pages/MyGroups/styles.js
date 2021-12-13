@@ -5,6 +5,7 @@ import BackgroundImage from "../../assets/undraw_conversation_re_c26v.svg";
 import Teste from "../../assets/Ellipse 3.svg";
 
 export const Container = styled.div`
+  opacity: ${(props) => (props.isOpen ? "0.9" : 1)};
   display: flex;
   flex-direction: column;
 `;

@@ -2,6 +2,8 @@ import ReactModal from "react-modal";
 
 import { useState, useEffect } from "react";
 
+import "./styles.css";
+
 const ModalDefault = ({ isOpen, setIsOpen, children }) => {
   const [modalStatus, setModalStatus] = useState(isOpen);
 
@@ -14,6 +16,7 @@ const ModalDefault = ({ isOpen, setIsOpen, children }) => {
       shouldCloseOnOverlayClick={true}
       onRequestClose={setIsOpen}
       isOpen={modalStatus}
+      ariaHideApp={false}
       style={{
         content: {
           top: "50%",
@@ -25,10 +28,8 @@ const ModalDefault = ({ isOpen, setIsOpen, children }) => {
           backgroundColor: "#fff",
           color: "#333",
           borderRadius: "8px",
-          width: "50vw",
-          maxWidth: "700px",
           border: "none",
-          padding: "50px",
+          padding: "35px 28px",
         },
         overlay: {
           backgroundColor: "rgba(51,51,51,0.5)",
