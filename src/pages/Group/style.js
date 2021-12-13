@@ -77,6 +77,7 @@ export const LeftSideContainer = styled.div`
     flex-grow: 1;
     margin-right: 1rem;
     margin-left: 5vw;
+    min-width: 50vw;
   }
 `;
 
@@ -122,15 +123,30 @@ export const GoalsSection = styled.section`
 `;
 
 export const MembersSection = styled.section`
+  display: none;
+
   border: 1px solid var(--black);
   padding: 5px 12px;
   margin-bottom: 1rem;
-  display: none;
+
+  overflow-y: scroll;
+  align-items: center;
+
   @media screen and (min-width: 900px) {
     display: flex;
+    flex-direction: column;
     flex-grow: 1;
     width: 25vw;
     min-width: 25vw;
     margin-right: 5vw;
+    max-height: 72vh;
   }
+`;
+
+export const MembersCardDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
 `;
