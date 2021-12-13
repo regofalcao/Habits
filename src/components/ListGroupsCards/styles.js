@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Container = styled.main`
   display: flex;
   border-radius: 8px;
-  padding: 20px;
+  padding: 20px 12px;
   border: 1px solid var(--black);
   opacity: ${(props) => props.openSidebar && "0.9"};
-
-  width: 80%;
+  min-height: 80vh;
+  width: 95%;
   background-color: var(--bege);
   flex-direction: column;
   box-sizing: border-box;
@@ -44,7 +44,6 @@ export const Container = styled.main`
       position: relative;
       display: flex;
       justify-content: center;
-      /* width: 100%; */
 
       div {
         max-height: 40px;
@@ -60,13 +59,14 @@ export const Container = styled.main`
         position: absolute;
         font-size: 1.9rem;
         top: 15%;
-        right: 5%;
+        right: 1%;
       }
     }
   }
 
   @media screen and (min-width: 900px) {
     margin-top: 20px;
+    width: 80%;
     background-color: rgba(251, 247, 236, 0.8);
     section {
       header {
@@ -83,9 +83,23 @@ export const Container = styled.main`
         }
 
         svg {
-          right: 8%;
+          right: 5%;
         }
       }
     }
+  }
+`;
+
+export const ListCards = styled.ul`
+  list-style: none;
+  margin-top: 20px;
+  gap: 25px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 900px) {
+    align-self: center;
+    width: 62%;
   }
 `;
