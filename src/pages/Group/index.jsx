@@ -207,6 +207,7 @@ const Group = () => {
               <ActivitiesCardDisplay>
                 {activities.map((activitie) => (
                   <CardActivitie
+                    key={activitie.id}
                     id={activitie.id}
                     title={activitie.title}
                     realization_time={activitie.realization_time}

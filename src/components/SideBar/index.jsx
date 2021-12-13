@@ -15,8 +15,6 @@ import { useOpenSideBar } from "../../providers/OpenSideBar";
 const SideBar = () => {
   const { openSidebar, isOwner } = useOpenSideBar();
 
-  console.log(openSidebar);
-
   return (
     <>
       {openSidebar && (
