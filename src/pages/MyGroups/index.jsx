@@ -1,6 +1,7 @@
 import Header from "../../components/Header";
 import SideBar from "../../components/SideBar";
 import ListGroupsCard from "../../components/ListGroupsCards";
+import { useOpenSideBar } from "../../providers/OpenSideBar";
 import { Container, Content, Background } from "./styles";
 
 import ModalAddGroup from "../../components/ModalCreateGroup";
@@ -12,15 +13,13 @@ const MyGroups = () => {
 
   return (
     <>
+      <Header />
+      <SideBar />
       <ModalAddGroup />
       <Container isOpen={modalOpen}>
-        <Header />
-        <Content>
-          <SideBar />
-          <Background>
-            <ListGroupsCard />
-          </Background>
-        </Content>
+        <Background>
+          <ListGroupsCard />
+        </Background>
       </Container>
     </>
   );

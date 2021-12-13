@@ -5,6 +5,7 @@ export const Container = styled.main`
   border-radius: 8px;
   padding: 20px;
   border: 1px solid var(--black);
+  opacity: ${(props) => props.openSidebar && "0.9"};
 
   width: 80%;
   background-color: var(--bege);
@@ -70,7 +71,7 @@ export const Container = styled.main`
     section {
       header {
         justify-content: flex-end;
-        gap: 40%;
+        gap: 37%;
       }
 
       > div {

@@ -6,6 +6,7 @@ export const Container = styled.aside`
   width: 55vw;
   max-width: 208px;
   height: 100vh;
+  z-index: 1;
   background-color: #4348de;
 
   section {
@@ -79,6 +80,7 @@ export const Container = styled.aside`
 
   @media screen and (min-width: 900px) {
     display: none;
+    z-index: normal;
   }
 `;
 
