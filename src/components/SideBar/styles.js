@@ -7,9 +7,10 @@ export const Container = styled.aside`
   max-width: 208px;
   height: 100vh;
   background-color: #4348de;
+  padding-top: 1rem;
 
   section {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     width: 90%;
     display: flex;
     margin-left: 12px;
