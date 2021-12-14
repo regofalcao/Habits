@@ -1,12 +1,40 @@
 import styled from "styled-components";
 
+export const DivExt = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #fbf7ec;
+
+  img {
+    display: none;
+  }
+
+  @media (min-width: 800px) {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100vh;
+
+    img {
+      display: inline;
+      width: 450px;
+      height: 350px;
+      margin-top: 200px;
+    }
+  }
+`;
+
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #fbf7ec;
-  height: 90vh;
+  margin-top: 15%;
 
   img {
     display: none;
@@ -15,6 +43,8 @@ export const Div = styled.div`
   @media (min-width: 800px) {
     flex-direction: column;
     align-items: left;
+    margin-top: 80px;
+    margin-left: 5%;
     img {
       display: inline;
     }
@@ -26,6 +56,7 @@ export const Form = styled.form`
   align-items: center;
   width: 100%;
   max-width: 400px;
+  margin-top: 40%;
 
   input {
     background-color: #fff;
@@ -35,6 +66,10 @@ export const Form = styled.form`
   }
 
   @media (min-width: 800px) {
+    margin-top: 180px;
+    input {
+      width: 300px;
+    }
   }
 `;
 export const Button = styled.button`
@@ -47,4 +82,10 @@ export const Button = styled.button`
   width: 15rem;
   border-radius: 5px;
   background-color: #4348de;
+
+  @media (min-width: 800px) {
+
+      width: 330px;
+    
+
 `;

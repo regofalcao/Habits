@@ -6,8 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import { Div, Form, Button } from "./style";
 import { useHistory } from "react-router-dom";
+import loginImg from "../../assets/login-notebook.png";
 
-const login = () => {
+const Login = () => {
   const { login } = useAuth();
 
   const formSchema = yup.object().shape({
@@ -30,31 +31,34 @@ const login = () => {
 
   return (
     <>
-      <Div>
-        <Logo />
-        <Form onSubmit={handleSubmit(login(onSubmitForm))}>
-          <TextField
-            sx={{ m: 1 }}
-            {...register("username")}
-            label="Usuário"
-            variant="outlined"
-            size="small"
-            error={!!errors.username}
-            helperText={errors.username?.message}
-          />
-          <TextField
-            sx={{ m: 1 }}
-            {...register("password")}
-            label="Senha"
-            variant="outlined"
-            type="password"
-            size="small"
-            error={!!errors.password}
-            helperText={errors.password?.message}
-          />
-          <Button type="submit">Entrar</Button>
-        </Form>
-      </Div>
+      <DivExt>
+        <img src={loginImg}></img>
+        <Div>
+          <Logo />
+          <Form onSubmit={handleSubmit(onSubmitForm)}>
+            <TextField
+              sx={{ m: 1 }}
+              {...register("username")}
+              label="Usuário"
+              variant="outlined"
+              size="small"
+              error={!!errors.username}
+              helperText={errors.username?.message}
+            />
+            <TextField
+              sx={{ m: 1 }}
+              {...register("password")}
+              label="Senha"
+              variant="outlined"
+              type="password"
+              size="small"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+            <Button type="submit">Entrar</Button>
+          </Form>
+        </Div>
+      </DivExt>
     </>
   );
 };
