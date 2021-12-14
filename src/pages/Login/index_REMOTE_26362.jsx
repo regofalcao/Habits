@@ -1,6 +1,6 @@
 import Logo from "../../components/Logo";
 import * as yup from "yup";
-import { useUser } from "../../providers/User";
+import { useAuth } from "../../providers/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
