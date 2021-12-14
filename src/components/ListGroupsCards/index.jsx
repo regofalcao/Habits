@@ -7,14 +7,26 @@ import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 import { useOpenModal } from "../../providers/OpenModal";
 
+import { useEffect } from "react";
+
 import AddButton from "../../components/AddButton";
+
+import { useGroups } from "../../providers/Groups";
 
 import CardGroup from "../../components/CardGroup";
 
 const ListGroupsCard = () => {
   const { setModalOpen, setEditGroup } = useOpenModal();
 
+  const { getMyGroups, myGroupsList } = useGroups();
+
   const { openSidebar } = useOpenSideBar();
+
+  useEffect(() => {
+    getMyGroups();
+  }, []);
+
+  console.log(myGroupsList);
 
   return (
     <Container openSidebar={openSidebar}>
@@ -35,9 +47,9 @@ const ListGroupsCard = () => {
           <SearchIcon />
         </div>
         <ListCards>
-          <CardGroup />
-          <CardGroup />
-          <CardGroup />
+          {myGroupsList.map((group) => (
+            <CardGroup key={group.id} group={group} />
+          ))}
         </ListCards>
       </section>
     </Container>
