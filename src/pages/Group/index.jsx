@@ -113,7 +113,7 @@ const Group = () => {
               <SectionTitle>
                 <h2>Metas</h2>
                 <MetasDisplay>
-                  {goals.map((goal) => {
+                  {/* {goals.map((goal) => (
                     <CardMetas
                       group={goal.group}
                       title={goal.title}
@@ -121,7 +121,7 @@ const Group = () => {
                       how_much_achieved={goal.how_much_achieved}
                       achieved={goal.achieved}
                     />;
-                  })}
+                  ))} */}
                 </MetasDisplay>
                 <AddButton />
               </SectionTitle>
