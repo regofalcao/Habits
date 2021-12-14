@@ -12,8 +12,11 @@ import {
   GoalsSection,
   MembersSection,
   LeftSideContainer,
+<<<<<<< HEAD
   MembersCardDisplay,
+=======
   MetasDisplay,
+>>>>>>> feature/MetaCard
 } from "./style";
 
 import Header from "../../components/Header";

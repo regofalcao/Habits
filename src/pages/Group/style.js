@@ -150,3 +150,18 @@ export const MembersCardDisplay = styled.div`
   gap: 0.5rem;
   padding-bottom: 1rem;
 `;
+
+export const MetasDisplay = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  overflow-y: scroll;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 900px) {
+    flex-wrap: wrap;
+    overflow-y: unset;
+    justify-content: center;
+  }
+`;

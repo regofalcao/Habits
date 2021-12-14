@@ -13,7 +13,6 @@ import {
   MembersSection,
   LeftSideContainer,
   MembersCardDisplay,
-  MetasDisplay,
 } from "./style";
 
 import Header from "../../components/Header";
@@ -26,7 +25,6 @@ import { useGroups } from "../../providers/Groups";
 import { useUser } from "../../providers/User";
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import CardMetas from "../../components/CardMetas";
 
 const Group = () => {
   const history = useHistory();
@@ -112,17 +110,11 @@ const Group = () => {
             <GoalsSection>
               <SectionTitle>
                 <h2>Metas</h2>
-                <MetasDisplay>
-                  {goals.map((goal) => {
-                    <CardMetas
-                      group={goal.group}
-                      title={goal.title}
-                      difficulty={goal.difficulty}
-                      how_much_achieved={goal.how_much_achieved}
-                      achieved={goal.achieved}
-                    />;
-                  })}
-                </MetasDisplay>
+                {/* <div>
+                  {
+                    goals.map(activitie => {})
+                  }
+                </div> */}
                 <AddButton />
               </SectionTitle>
             </GoalsSection>
