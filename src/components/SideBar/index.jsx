@@ -10,10 +10,14 @@ import { Link } from "react-router-dom";
 
 import UserImage from "../../assets/user.svg";
 
+import { useOpenModal } from "../../providers/OpenModal";
+
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 const SideBar = () => {
   const { openSidebar, isOwner } = useOpenSideBar();
+
+  const { modalOpen } = useOpenModal();
 
   return (
     <>
@@ -44,7 +48,7 @@ const SideBar = () => {
           </ul>
         </Container>
       )}
-      <ContainerDesk>
+      <ContainerDesk modalOpen={modalOpen}>
         <section>
           <img src={UserImage} alt="user" />
           <h2>Usuário</h2>

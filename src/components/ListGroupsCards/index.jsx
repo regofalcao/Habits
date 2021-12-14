@@ -7,10 +7,12 @@ import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 import { useOpenModal } from "../../providers/OpenModal";
 
+import AddButton from "../../components/AddButton";
+
 import CardGroup from "../../components/CardGroup";
 
 const ListGroupsCard = () => {
-  const { modalOpen, setModalOpen } = useOpenModal();
+  const { setModalOpen, setEditGroup } = useOpenModal();
 
   const { openSidebar } = useOpenSideBar();
 
@@ -18,7 +20,15 @@ const ListGroupsCard = () => {
     <Container openSidebar={openSidebar}>
       <section>
         <header>
-          <h2>Meus Grupos</h2> <div onClick={() => setModalOpen(true)}>+</div>
+          <h2>Meus Grupos</h2>
+          <AddButton
+            onClick={() => {
+              setModalOpen(true);
+              setEditGroup(false);
+            }}
+          >
+            +
+          </AddButton>
         </header>
         <div>
           <TextField label="Pesquisar em meus grupos" />

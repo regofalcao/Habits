@@ -88,6 +88,7 @@ export const Container = styled.aside`
 export const ContainerDesk = styled(Container)`
   align-self: flex-start;
   display: none;
+  z-index: ${(props) => (props.modalOpen ? "0" : "1")};
 
   ul {
     max-width: 208px;
