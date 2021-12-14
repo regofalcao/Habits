@@ -24,25 +24,17 @@ const ListGroupsCard = () => {
 
   const [text, setText] = useState("");
   const [filteredGroups, setFilteredGroups] = useState([]);
-  const [isFiltered, setIsFiltered] = useState(false);
+
   useEffect(() => {
     getMyGroups();
-  }, []);
 
-  console.log(myGroupsList);
-
-  const filterGroups = () => {
-    if (text !== "") {
-      const result = myGroupsList.filter(({ name }) => {
-        return name.includes(text);
-      });
-
-      setFilteredGroups(result);
-      setIsFiltered(true);
-    } else {
-      setIsFiltered(false);
-    }
-  };
+    const result = myGroupsList.filter(
+      ({ name, category }) =>
+        name.toLowerCase().includes(text.toLowerCase()) ||
+        category.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredGroups(result);
+  }, [text]);
 
   return (
     <Container openSidebar={openSidebar}>
@@ -60,20 +52,19 @@ const ListGroupsCard = () => {
         </header>
         <div>
           <TextField
-            onClick={(ev) => {
+            onChange={(ev) => {
               setText(ev.target.value);
-              filterGroups();
             }}
             label="Pesquisar em meus grupos"
           />
           <SearchIcon />
         </div>
         <ListCards>
-          {!isFiltered
-            ? myGroupsList.map((group) => (
+          {!!text
+            ? filteredGroups.map((group) => (
                 <CardGroup key={group.id} group={group} />
               ))
-            : filteredGroups.map((group) => (
+            : myGroupsList.map((group) => (
                 <CardGroup key={group.id} group={group} />
               ))}
         </ListCards>

@@ -19,7 +19,16 @@ export const Container = styled.li`
 
 export const IconArea = styled.div`
   display: flex;
-  background-color: var(--color-tertiary);
+  background-color: ${(props) =>
+    props.category === "trabalho"
+      ? "#C03636"
+      : props.category === "leitura"
+      ? "#8F8389"
+      : props.category === "saude"
+      ? "#38C15D"
+      : props.category === "esporte"
+      ? "#4348DE"
+      : "#F568F8"};
   align-items: center;
   justify-content: center;
   max-width: 60px;
@@ -80,7 +89,16 @@ export const DescriptionArea = styled.section`
 `;
 
 export const CategoryCard = styled.section`
-  background-color: var(--color-tertiary);
+  background-color: ${(props) =>
+    props.category === "trabalho"
+      ? "#C03636"
+      : props.category === "leitura"
+      ? "#8F8389"
+      : props.category === "saude"
+      ? "#38C15D"
+      : props.category === "esporte"
+      ? "#4348DE"
+      : "#F568F8"};
   width: 80px;
   display: flex;
   text-align: center;

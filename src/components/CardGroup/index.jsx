@@ -1,6 +1,10 @@
 import { Container, IconArea, DescriptionArea, CategoryCard } from "./styles";
 
 import WorkIcon from "@mui/icons-material/Work";
+import MonitorHeartOutlinedIcon from "@mui/icons-material/MonitorHeartOutlined";
+import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import SkateboardingOutlinedIcon from "@mui/icons-material/SkateboardingOutlined";
+import AccessibilityIcon from "@mui/icons-material/Accessibility";
 
 import { useGroups } from "../../providers/Groups";
 
@@ -21,13 +25,23 @@ const CardGroup = ({ group }) => {
 
   return (
     <Container onClick={() => handleCard()}>
-      <IconArea>
-        <WorkIcon />
+      <IconArea category={category}>
+        {category === "esporte" ? (
+          <SkateboardingOutlinedIcon />
+        ) : category === "leitura" ? (
+          <MenuBookOutlinedIcon />
+        ) : category === "saude" ? (
+          <MonitorHeartOutlinedIcon />
+        ) : category === "trabalho" ? (
+          <WorkIcon />
+        ) : (
+          <AccessibilityIcon />
+        )}
       </IconArea>
       <DescriptionArea>
         <section>
           <h2>{name}</h2>
-          <CategoryCard>
+          <CategoryCard category={category}>
             <h4>{category}</h4>
           </CategoryCard>
         </section>
