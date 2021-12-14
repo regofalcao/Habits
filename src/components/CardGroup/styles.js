@@ -2,10 +2,19 @@ import styled from "styled-components";
 
 export const Container = styled.li`
   /* height: 75px; */
+  cursor: pointer;
   width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 5%;
+  justify-content: space-around;
+  gap: 3%;
+  padding: 0 10px 0 0;
+  border: 2px solid transparent;
+  transition: 0.1s linear;
+
+  &:hover {
+    border-right: 2px solid var(--black);
+    border-radius: 5px;
+  }
 `;
 
 export const IconArea = styled.div`
@@ -46,6 +55,9 @@ export const DescriptionArea = styled.section`
       font-weight: 600;
       color: #333;
       font-size: 1rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     display: flex;

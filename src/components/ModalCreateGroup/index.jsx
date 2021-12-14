@@ -27,7 +27,7 @@ const ModalAddGroup = () => {
       .nullable(),
   });
 
-  const { modalOpen, handleModal } = useOpenModal();
+  const { modalOpen, handleModal, editGroup, setEditGroup } = useOpenModal();
 
   const {
     register,
@@ -35,13 +35,16 @@ const ModalAddGroup = () => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: !editGroup && yupResolver(schema),
   });
 
   const onSubmit = (data) => {
     console.log(data);
     reset();
-    toast.success("Grupo criado com sucesso!");
+
+    editGroup
+      ? toast.success("Grupo editado com sucesso!")
+      : toast.success("Grupo cadastrado com sucesso!");
   };
 
   const { setModalOpen } = useOpenModal();
@@ -49,8 +52,13 @@ const ModalAddGroup = () => {
   return (
     <ModalDefault isOpen={modalOpen} setIsOpen={handleModal}>
       <Header>
-        <h2>Cadastrar Grupo</h2>
-        <CloseIcon onClick={() => setModalOpen(false)} />
+        <h2>{editGroup ? "Editar Grupo" : "Cadastrar Grupo"}</h2>
+        <CloseIcon
+          onClick={() => {
+            setModalOpen(false);
+            reset();
+          }}
+        />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextField
@@ -100,8 +108,10 @@ const ModalAddGroup = () => {
         </section>
 
         <SectionButton>
-          <SubmitButtons greenColor>Salvar alterações</SubmitButtons>
-          <SubmitButtons>Excluir</SubmitButtons>
+          <SubmitButtons greenColor type="submit">
+            {editGroup ? "Salvar alterações" : "Criar Grupo"}
+          </SubmitButtons>
+          <SubmitButtons>{editGroup ? "Excluir" : "Fechar"}</SubmitButtons>
         </SectionButton>
       </Form>
     </ModalDefault>

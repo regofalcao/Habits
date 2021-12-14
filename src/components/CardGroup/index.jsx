@@ -2,9 +2,18 @@ import { Container, IconArea, DescriptionArea, CategoryCard } from "./styles";
 
 import WorkIcon from "@mui/icons-material/Work";
 
+import { useOpenModal } from "../../providers/OpenModal";
+
 const CardGroup = ({ name, category, description }) => {
+  const { setEditGroup, setModalOpen } = useOpenModal();
+
+  const handleCard = () => {
+    setEditGroup(true);
+    setModalOpen(true);
+  };
+
   return (
-    <Container>
+    <Container onClick={() => handleCard()}>
       <IconArea>
         <WorkIcon />
       </IconArea>
