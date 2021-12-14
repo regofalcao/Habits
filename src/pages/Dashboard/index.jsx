@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import SideBar from "../../components/SideBar";
 import { TextField } from "@mui/material";
+import ModalCreateHabitis from "../../components/ModalCreateHabits"
 
 const Dashboard = () => {
 
@@ -88,7 +89,8 @@ const Dashboard = () => {
   },]);
   const [userInput, setUserInput] = useState("");
   const [newList, setNewList] = useState([]);
-  
+  const [opemModal, setOpemModal] = useState(false);
+console.log(opemModal)
 
   useEffect(()=>{
       const newListHabits = habitsList.filter((item) => (
@@ -108,15 +110,17 @@ const Dashboard = () => {
 
   return (
     <>
+      {opemModal &&  <ModalCreateHabitis setOpemModal = {setOpemModal} />}
       <Header />
       <SideBar/>
       <Conteiner>
         <CardsConteiner>
           <CardHeader>
             <p>Meus Habitos</p>
-            <div>+</div>
+            <div onClick = {() => setOpemModal(true)}  >+</div>
           </CardHeader>
-          <TextField  fullWidth
+          <TextField  
+                      fullWidth
                       label="Pesquisar em meus habitos" 
                       onChange = {e => setUserInput(e.target.value)} />
           {userInput ? <CardHabits habits = {newList}/> : <CardHabits habits = {habitsList} />} 

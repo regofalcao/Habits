@@ -54,6 +54,7 @@ const ModalAddGroup = () => {
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextField
+          sx = {{ height: "10px" }}
           {...register("name")}
           label="Nome do grupo"
           error={!!errors.name}

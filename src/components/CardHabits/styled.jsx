@@ -55,7 +55,7 @@ export const Name = styled.div`
     white-space:nowrap;
     overflow: hidden;
     @media screen and (min-width: 650px){
-        width:300px
+        width:350px
     }
     `
 export const Category = styled.div`

@@ -32,6 +32,7 @@ const CardHabits = ({habits}) => {
         
         if (item.how_much_achieved+howMuch >= 100) { 
             console.log("100%")
+            item.how_much_achieved = 100
             api.patch(`/habits/${item.id}`,
                 {   
                     achieved: true,
@@ -43,6 +44,7 @@ const CardHabits = ({habits}) => {
                 .then(response => console.log(response))
             } if (item.how_much_achieved+howMuch < 100) {
                 console.log("ainda não")
+                item.how_much_achieved = item.how_much_achieved + howMuch
                 api.patch(`/habits/${item.id}`,
                     {   
                         how_much_achieved: item.how_much_achieved+howMuch

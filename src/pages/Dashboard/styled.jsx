@@ -8,7 +8,7 @@ export const Conteiner  = styled.div`
 
 export const CardsConteiner = styled.div`
     width: 95%;
-    max-height: 450px;
+    height: 660px;
     border: solid 1px black;
     border-radius: 5px;
     margin: 15px 0 ;
@@ -31,7 +31,7 @@ export const CardsConteiner = styled.div`
         width:60%;
         max-height:580px;
         margin: 50px 0 0 208px;
-        padding: 2% 6%;
+        padding: 2% 10%;
 
         ::-webkit-scrollbar {
         width: 8px;              
