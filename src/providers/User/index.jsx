@@ -1,7 +1,8 @@
 import { useState, createContext, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { useAuth } from "../Auth";
+import jwt_decode from "jwt-decode";
 import api from "../../services/api";
 
 const UserContext = createContext({});
@@ -13,15 +14,51 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
-  const { token } = useAuth();
+  const history = useHistory();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@kenzieHabits:user")) || {}
   );
 
+  const [token, setToken] = useState(
+    localStorage.getItem("@kenzieHabits:token") || ""
+  );
+
   const [myHabitsList, setMyHabitsList] = useState(
     JSON.parse(localStorage.getItem("@kenzieHabits:habits")) || []
   );
+
+  const login = (data) => {
+    api
+      .post("/sessions/", data)
+      .then((response) => {
+        const { access: token } = response.data;
+
+        const decodedToken = jwt_decode(token);
+        const { user_id } = decodedToken;
+
+        const user = {
+          id: user_id,
+          username: data.username,
+        };
+
+        localStorage.setItem("@kenzieHabits:token", token);
+        localStorage.setItem("@kenzieHabits:user", JSON.stringify(user));
+
+        setToken(token);
+        setUser(user);
+
+        history.push("/dashboard");
+        toast.success("Você está logado");
+      })
+      .catch((err) => toast.error("Usuário e/ou senha incorretos"));
+  };
+
+  const logout = () => {
+    localStorage.removeItem("@kenzieHabits:token");
+    localStorage.removeItem("@kenzieHabits:user");
+    setToken("");
+  };
 
   const getMyHabits = () => {
     api
@@ -90,8 +127,12 @@ export const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        token,
+        setToken,
         user,
         setUser,
+        login,
+        logout,
         myHabitsList,
         getMyHabits,
         createNewHabit,

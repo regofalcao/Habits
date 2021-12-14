@@ -1,6 +1,6 @@
 import { useState, createContext, useContext } from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "../Auth";
+import { useUser } from "../User";
 
 import api from "../../services/api";
 
@@ -13,7 +13,7 @@ export const useActivities = () => {
 };
 
 export const ActivitiesProvider = ({ children }) => {
-  const { token } = useAuth();
+  const { token } = useUser();
 
   const [activitiesList, setActivitiesList] = useState([]);
 
