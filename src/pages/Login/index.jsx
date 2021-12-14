@@ -1,14 +1,13 @@
 import Logo from "../../components/Logo";
 import * as yup from "yup";
-import { useAuth } from "../../providers/auth";
+import { useUser } from "../../providers/User";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import { Div, Form, Button } from "./style";
-import { useHistory } from "react-router-dom";
 
-const login = () => {
-  const { login } = useAuth();
+const Login = () => {
+  const { login } = useUser();
 
   const formSchema = yup.object().shape({
     username: yup.string().required("Nome de Usuário Obrigatório"),
@@ -32,7 +31,7 @@ const login = () => {
     <>
       <Div>
         <Logo />
-        <Form onSubmit={handleSubmit(login(onSubmitForm))}>
+        <Form onSubmit={handleSubmit(onSubmitForm)}>
           <TextField
             sx={{ m: 1 }}
             {...register("username")}
