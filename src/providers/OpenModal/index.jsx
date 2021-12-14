@@ -10,12 +10,16 @@ export const useOpenModal = () => {
 export const OpenModalProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [editGroup, setEditGroup] = useState(false);
+
   const handleModal = () => {
     setModalOpen(!modalOpen);
   };
 
   return (
-    <OpenModalContext.Provider value={{ modalOpen, setModalOpen, handleModal }}>
+    <OpenModalContext.Provider
+      value={{ modalOpen, setModalOpen, handleModal, editGroup, setEditGroup }}
+    >
       {children}
     </OpenModalContext.Provider>
   );

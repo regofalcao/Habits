@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 
-const AddButton = () => {
+const AddButton = ({ ...rest }) => {
   const style = {
     p: 1,
     fontSize: 20,
@@ -14,7 +14,7 @@ const AddButton = () => {
       transition: "opacity 0.5s",
     },
   };
-  return <AddIcon sx={style} />;
+  return <AddIcon {...rest} sx={style} />;
 };
 
 export default AddButton;
