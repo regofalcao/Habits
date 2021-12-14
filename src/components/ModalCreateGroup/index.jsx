@@ -27,7 +27,8 @@ const ModalAddGroup = () => {
       .nullable(),
   });
 
-  const { modalOpen, handleModal, editGroup, setEditGroup } = useOpenModal();
+  const { modalOpen, handleModal, editGroup, setEditGroup, setModalOpen } =
+    useOpenModal();
 
   const {
     register,
@@ -47,22 +48,20 @@ const ModalAddGroup = () => {
       : toast.success("Grupo cadastrado com sucesso!");
   };
 
-  const { setModalOpen } = useOpenModal();
-
   return (
     <ModalDefault isOpen={modalOpen} setIsOpen={handleModal}>
       <Header>
         <h2>{editGroup ? "Editar Grupo" : "Cadastrar Grupo"}</h2>
         <CloseIcon
           onClick={() => {
-            setModalOpen(false);
+            handleModal();
             reset();
           }}
         />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextField
-          sx = {{ height: "10px" }}
+          sx={{ height: "10px" }}
           {...register("name")}
           label="Nome do grupo"
           error={!!errors.name}

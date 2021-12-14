@@ -20,10 +20,12 @@ import SideBar from "../../components/SideBar";
 import AddButton from "../../components/AddButton";
 import CardActivitie from "../../components/CardActivitie";
 import CardMember from "../../components/CardMember";
+import ModalCreateActivity from "../../components/ModalCreateActivity";
 
 import { useGroups } from "../../providers/Groups";
 import { useUser } from "../../providers/User";
 import { useOpenSideBar } from "../../providers/OpenSideBar";
+import { useOpenModal } from "../../providers/OpenModal";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Group = () => {
@@ -38,6 +40,13 @@ const Group = () => {
 
   const { name, creator, users_on_group, goals, activities } = groupInfo;
   const membersCount = users_on_group || 0;
+
+  const {
+    openActivityModal,
+    setOpenActivityModal,
+    openGoalModal,
+    setOpenGoalModal,
+  } = useOpenModal();
 
   // const getGroupInfo = () => {
   //   setGroupInfo(myGroups.find((group) => group.id === id));
@@ -65,10 +74,19 @@ const Group = () => {
   //   checkOwnership();
   // }, [groupInfo]);
 
+  const handleModalButton = (type) => {
+    if (type === "activity") {
+      setOpenActivityModal(true);
+    } else {
+      setOpenGoalModal(true);
+    }
+  };
+
   return (
     <>
       <Header />
       <SideBar />
+      <ModalCreateActivity isOpen={openActivityModal} />
       <Container>
         <TopContainer>
           <h3>
@@ -93,7 +111,7 @@ const Group = () => {
             <ActivitiesSection>
               <SectionTitle>
                 <h2>Atividades</h2>
-                <AddButton />
+                <AddButton onClick={() => handleModalButton("activity")} />
               </SectionTitle>
               <ActivitiesCardDisplay>
                 {/* {activities.map((activitie) => (
