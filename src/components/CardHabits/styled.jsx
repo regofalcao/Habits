@@ -8,7 +8,6 @@ export const CardConteiner = styled.div`
    display: flex; 
    justify-content: space-between;
    margin: 10px 0 25px 0;
-
    
 `    
 
@@ -33,6 +32,7 @@ export const IconConteiner = styled.div`
     }
     @media screen and (min-width: 650px){
         height:80px;
+        width:18%
     }
 
 `
@@ -55,7 +55,7 @@ export const Name = styled.div`
     white-space:nowrap;
     overflow: hidden;
     @media screen and (min-width: 650px){
-        width:200px
+        width:350px
     }
     `
 export const Category = styled.div`
@@ -103,7 +103,7 @@ export const ProgressBar = styled.div`
                                         "#4348DE" : "#8F8389" };
     height: 100%;
     border-radius:4px;
-    font-size:15px;
+    font-size:12px;
 
     p{
         text-align:center;
