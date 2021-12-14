@@ -7,12 +7,12 @@ export const Conteiner  = styled.div`
 `
 
 export const CardsConteiner = styled.div`
-    width: 90%;
+    width: 95%;
     max-height: 450px;
-    border: solid 2px black;
+    border: solid 1px black;
     border-radius: 5px;
-    margin: 50px 0;
-    padding: 3%;
+    margin: 15px 0 ;
+    padding: 2% 3%;
     overflow: auto;
     ::-webkit-scrollbar {
         width: 4px;       
@@ -28,20 +28,37 @@ export const CardsConteiner = styled.div`
     }
 
     @media screen and (min-width: 650px){
-        width:450px;
+        width:60%;
         max-height:580px;
+        margin: 50px 0 0 208px;
+        padding: 2% 6%;
 
         ::-webkit-scrollbar {
         width: 8px;              
         }
     }
 `
-export const CardHeader = styled.div`
-    display:Flex;
-    justify-content: space-between;
+export const CardHeader = styled.div`    
     
-    p{
-        font-size:25px;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 20px 0;
+    p {
+        font-weight: bold;
+        color: var(--black);
+        font-size: 1.2rem;
     }
+
+    > div {
+        background-color: var(--color-secundary);
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: var(--light-gray);
+        width: 40px;
+        font-size: 28px;
+        padding: 0 2px;
+        cursor: pointer;
+    }
+    
 `

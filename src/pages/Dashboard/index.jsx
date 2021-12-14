@@ -1,19 +1,20 @@
 import Header from "../../components/Header";
 import { CardsConteiner, Conteiner, CardHeader} from "./styled";
-import CardHabits from "../../components/CardHabits/CardHabits";
+import CardHabits from "../../components/CardHabits";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import SideBar from "../../components/SideBar";
+import { TextField } from "@mui/material";
 
 const Dashboard = () => {
 
   const token = useState(JSON.parse(localStorage.getItem("token")) || "");
-  
   const [habitsList, setHabitsList] = useState([{
     id: 2607,
     title: "Calistenia a tarde (15 minutos)",
     category: "Sáude",
     difficulty: "Muito díficil",
-    frequency: "Diária",
+    frequency: "ddswa",
     achieved: false,
     how_much_achieved: 90,
     user: 673
@@ -23,7 +24,7 @@ const Dashboard = () => {
     title: "batata",
     category: "esporte",
     difficulty: "Muito díficil",
-    frequency: "Diária",
+    frequency: "Mensal",
     achieved: false,
     how_much_achieved: 30,
     user: 673
@@ -84,10 +85,10 @@ const Dashboard = () => {
     achieved: false,
     how_much_achieved: 30,
     user: 673
-  },])
-
+  },]);
   const [userInput, setUserInput] = useState("");
-  const [newList, setNewList] = useState([])
+  const [newList, setNewList] = useState([]);
+  
 
   useEffect(()=>{
       const newListHabits = habitsList.filter((item) => (
@@ -108,13 +109,16 @@ const Dashboard = () => {
   return (
     <>
       <Header />
+      <SideBar/>
       <Conteiner>
         <CardsConteiner>
           <CardHeader>
             <p>Meus Habitos</p>
-            <p>mais Habitos</p>
+            <div>+</div>
           </CardHeader>
-          <input onChange = {e => setUserInput(e.target.value)} />
+          <TextField  fullWidth
+                      label="Pesquisar em meus habitos" 
+                      onChange = {e => setUserInput(e.target.value)} />
           {userInput ? <CardHabits habits = {newList}/> : <CardHabits habits = {habitsList} />} 
         </CardsConteiner>
       </Conteiner>
