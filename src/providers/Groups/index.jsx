@@ -21,6 +21,7 @@ export const GroupsProvider = ({ children }) => {
   const [nextPage] = useState("");
   const [previousPage] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
+  const [currentId, setCurrentId] = useState(0);
 
   const getMyGroups = () => {
     api
@@ -34,7 +35,6 @@ export const GroupsProvider = ({ children }) => {
 
         localStorage.setItem("@kenzieHabits:groups", JSON.stringify(myGroups));
         setMyGroupsList(myGroups);
-        toast.success("Lista de grupos atualizada");
       })
       .catch((err) =>
         toast.error("Erro! Não foi possível atualizar sua lista de grupos")
@@ -121,7 +121,7 @@ export const GroupsProvider = ({ children }) => {
       .catch((err) => toast.error("Não foi possível criar o grupo"));
   };
 
-  const editGroup = (data, groupId) => {
+  const editerGroup = (data, groupId) => {
     api
       .patch(`/groups/${groupId}/`, data, {
         headers: {
@@ -164,7 +164,7 @@ export const GroupsProvider = ({ children }) => {
   };
   const unsubscribeToAgroup = (groupId) => {
     api
-      .delete(`/groups/${groupId}/unsubscribe`, {
+      .delete(`/groups/${groupId}/unsubscribe/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -190,6 +190,8 @@ export const GroupsProvider = ({ children }) => {
         myGroupsList,
         searchList,
         pageNumber,
+        currentId,
+        setCurrentId,
         getMyGroups,
         goToNextPage,
         goToPreviousPage,
@@ -197,7 +199,7 @@ export const GroupsProvider = ({ children }) => {
         searchGroupCategory,
         getGroupsList,
         createGroup,
-        editGroup,
+        editerGroup,
         subscribeToAgroup,
         unsubscribeToAgroup,
       }}

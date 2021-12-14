@@ -4,6 +4,8 @@ import { useOpenModal } from "../../providers/OpenModal";
 
 import { TextField } from "@mui/material";
 
+import { useGroups } from "../../providers/Groups";
+
 import { toast } from "react-toastify";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -30,6 +32,14 @@ const ModalAddGroup = () => {
   const { modalOpen, handleModal, editGroup, setEditGroup } = useOpenModal();
 
   const {
+    currentId,
+    setCurrentId,
+    createGroup,
+    unsubscribeToAgroup,
+    editerGroup,
+  } = useGroups();
+
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -39,12 +49,29 @@ const ModalAddGroup = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     reset();
 
-    editGroup
-      ? toast.success("Grupo editado com sucesso!")
-      : toast.success("Grupo cadastrado com sucesso!");
+    if (!editGroup) {
+      createGroup(data);
+    }
+
+    if (editGroup) {
+      if (data.name === "") {
+        delete data.name;
+      }
+      if (data.description === "") {
+        delete data.description;
+      }
+
+      if (data.category === null) {
+        delete data.category;
+      }
+      editerGroup(data, currentId);
+    }
+  };
+
+  const deleteGroup = () => {
+    unsubscribeToAgroup(currentId);
   };
 
   const { setModalOpen } = useOpenModal();
@@ -110,7 +137,9 @@ const ModalAddGroup = () => {
           <SubmitButtons greenColor type="submit">
             {editGroup ? "Salvar alterações" : "Criar Grupo"}
           </SubmitButtons>
-          <SubmitButtons>{editGroup ? "Excluir" : "Fechar"}</SubmitButtons>
+          <SubmitButtons onClick={() => editGroup && deleteGroup()}>
+            {editGroup ? "Excluir" : "Fechar"}
+          </SubmitButtons>
         </SectionButton>
       </Form>
     </ModalDefault>

@@ -85,6 +85,7 @@ export const CategoryCard = styled.section`
   display: flex;
   text-align: center;
   border-radius: 8px;
+  text-transform: capitalize;
 
   h4 {
     line-height: 28px;

@@ -2,14 +2,21 @@ import { Container, IconArea, DescriptionArea, CategoryCard } from "./styles";
 
 import WorkIcon from "@mui/icons-material/Work";
 
+import { useGroups } from "../../providers/Groups";
+
 import { useOpenModal } from "../../providers/OpenModal";
 
-const CardGroup = ({ name, category, description }) => {
+const CardGroup = ({ group }) => {
   const { setEditGroup, setModalOpen } = useOpenModal();
+
+  const { setCurrentId } = useGroups();
+
+  const { name, category, description, id } = group;
 
   const handleCard = () => {
     setEditGroup(true);
     setModalOpen(true);
+    setCurrentId(id);
   };
 
   return (
@@ -19,16 +26,13 @@ const CardGroup = ({ name, category, description }) => {
       </IconArea>
       <DescriptionArea>
         <section>
-          <h2>Grupo de Trabalho</h2>
+          <h2>{name}</h2>
           <CategoryCard>
-            <h4>Trabalho</h4>
+            <h4>{category}</h4>
           </CategoryCard>
         </section>
 
-        <span>
-          Descrição do grupo pode ser grande , então tem que ser responsivo
-          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        </span>
+        <span>{description}</span>
       </DescriptionArea>
     </Container>
   );
