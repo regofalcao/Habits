@@ -6,12 +6,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import Providers from "./providers";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Providers>
-        <App />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <App />
+        </LocalizationProvider>
         <ToastContainer
           position="top-right"
           autoClose={5000}

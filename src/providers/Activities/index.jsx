@@ -32,9 +32,24 @@ export const ActivitiesProvider = ({ children }) => {
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };
 
-  const updateActivity = (activityId, groupId) => {
+  const createActivity = (data, groupId) => {
     api
-      .patch(`/activities/${activityId}/`, {
+      .post("/activities/", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        getActivities(groupId);
+
+        toast.success("Atividade cadastrada");
+      })
+      .catch((err) => toast.error("Ocorreu um erro na solicitação"));
+  };
+
+  const updateActivity = (data, activityId, groupId) => {
+    api
+      .patch(`/activities/:${activityId}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -68,6 +83,7 @@ export const ActivitiesProvider = ({ children }) => {
     <ActivitiesContext.Provider
       value={{
         activitiesList,
+        createActivity,
         getActivities,
         updateActivity,
         deleteActivity,

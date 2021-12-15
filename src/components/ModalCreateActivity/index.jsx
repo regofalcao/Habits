@@ -1,30 +1,31 @@
-import ModalDefault from "../ModalDefault";
-
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useOpenModal } from "../../providers/OpenModal";
-
 import { TextField } from "@mui/material";
-
 import { toast } from "react-toastify";
+import { Form, Header, SectionButton } from "./styles";
+import { useActivities } from "../../providers/Activities";
 
 import CloseIcon from "@mui/icons-material/Close";
-
-import { Form, Header, SectionButton } from "./styles";
-
 import SubmitButtons from "../SubmitButtons";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import ModalDefault from "../ModalDefault";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const ModalAddActivity = () => {
+const ModalCreateActivity = ({ groupId }) => {
+  const { createActivity, updateActivity } = useActivities();
+
   const schema = yup.object().shape({
     title: yup.string().required("Nome da atividade obrigatório"),
   });
 
-  const { openActivityModal, handleModal, editActivity, setEditActivity } =
+  const { openActivityModal, handleModal, editActivity, activityId } =
     useOpenModal();
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -34,12 +35,15 @@ const ModalAddActivity = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    const { realization_time } = data;
+    const isoDate = realization_time.toISOString();
+    const newData = { ...data, realization_time: isoDate };
 
     editActivity
-      ? toast.success("Atividade editada com sucesso!")
-      : toast.success("Atividade cadastrada com sucesso!");
+      ? updateActivity(newData, activityId, groupId)
+      : createActivity(newData, groupId);
+
+    reset();
   };
 
   return (
@@ -58,8 +62,19 @@ const ModalAddActivity = () => {
           sx={{ height: "10px" }}
           {...register("title")}
           label="Nome da atividade"
-          error={!!errors.name}
-          helperText={errors.name?.message}
+          error={!!errors.title}
+          helperText={errors.title?.message}
+        />
+        <Controller
+          name="realization_time"
+          control={control}
+          render={({ field }) => (
+            <DateTimePicker
+              value={field.value}
+              onChange={(e) => field.onChange(e)}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          )}
         />
 
         <SectionButton>
@@ -73,4 +88,4 @@ const ModalAddActivity = () => {
   );
 };
 
-export default ModalAddActivity;
+export default ModalCreateActivity;

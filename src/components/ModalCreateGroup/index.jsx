@@ -35,7 +35,8 @@ const ModalAddGroup = () => {
       .nullable(),
   });
 
-  const { modalOpen, handleModal, editGroup, setEditGroup } = useOpenModal();
+  const { modalOpen, handleModal, editGroup, setEditGroup, setModalOpen } =
+    useOpenModal();
 
   const {
     currentId,
@@ -80,20 +81,19 @@ const ModalAddGroup = () => {
     unsubscribeToAgroup(currentId);
   };
 
-  const { setModalOpen } = useOpenModal();
-
   return (
     <ModalDefault isOpen={modalOpen} setIsOpen={handleModal}>
       <Header>
         <h2>{editGroup ? "Editar Grupo" : "Cadastrar Grupo"}</h2>
         <CloseIcon
           onClick={() => {
-            setModalOpen(false);
+            handleModal();
             reset();
           }}
         />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
+<<<<<<< HEAD
         <InputArea>
           <TextField
             sx={{ height: "10px" }}
@@ -111,6 +111,23 @@ const ModalAddGroup = () => {
             helperText={errors.description?.message}
           />
         </InputArea>
+=======
+        <TextField
+          sx={{ height: "10px" }}
+          {...register("name")}
+          label="Nome do grupo"
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
+        <TextField
+          {...register("description")}
+          label="Descrição do grupo"
+          multiline
+          rows={4}
+          error={!!errors.description}
+          helperText={errors.description?.message}
+        />
+>>>>>>> feature/modal-activity
         <TitleCategory>
           <h3>Selecionar Categoria:</h3>
           {!!errors.category && <p>{errors.category.message}</p>}
