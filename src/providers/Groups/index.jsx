@@ -20,7 +20,7 @@ export const GroupsProvider = ({ children }) => {
   const [searchList, setSearchList] = useState([]);
   const [nextPage] = useState("");
   const [previousPage] = useState("");
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(5);
   const [currentId, setCurrentId] = useState(0);
 
   const getMyGroups = () => {
@@ -85,15 +85,15 @@ export const GroupsProvider = ({ children }) => {
 
   const getGroupsList = (pageNumber) => {
     api
-      .get(`/groups/page=${pageNumber}`, {
+      .get(`/groups/?page=${pageNumber}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const groupsList = response.data;
+        const { results } = response.data;
 
-        setGroupsList(groupsList);
+        setGroupsList(results);
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };

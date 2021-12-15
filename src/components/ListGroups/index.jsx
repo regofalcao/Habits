@@ -1,46 +1,46 @@
 import { Container, ListCards } from "./styles";
 import { TextField } from "@mui/material";
-
 import SearchIcon from "@mui/icons-material/Search";
-
 import { useOpenSideBar } from "../../providers/OpenSideBar";
-
 import { useOpenModal } from "../../providers/OpenModal";
-
 import { useEffect, useState } from "react";
-
-import AddButton from "../../components/AddButton";
-
+import AddButton from "../AddButton";
 import { useGroups } from "../../providers/Groups";
-
-import CardGroup from "../../components/CardGroup";
+import CardGroup from "../CardGroup";
 
 const ListGroupsCard = () => {
   const { setModalOpen, setEditGroup } = useOpenModal();
+  const token = useState(JSON.parse(localStorage.getItem("token")) || "");
 
-  const { getMyGroups, myGroupsList, getGroupsList } = useGroups();
-
+  const { groupsList, setGroupsList, getGroupsList, pageNumber } = useGroups();
   const { openSidebar } = useOpenSideBar();
-
   const [text, setText] = useState("");
   const [filteredGroups, setFilteredGroups] = useState([]);
-
+  const [isFiltered, setIsFiltered] = useState(false);
   useEffect(() => {
-    getMyGroups();
+    getGroupsList(pageNumber);
+  }, []);
 
-    const result = myGroupsList.filter(
-      ({ name, category }) =>
-        name.toLowerCase().includes(text.toLowerCase()) ||
-        category.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilteredGroups(result);
-  }, [text]);
+  const filterGroups = () => {
+    if (text !== "") {
+      const result = setGroupsList.filter(({ name }) => {
+        return name.includes(text);
+      });
+
+      setFilteredGroups(result);
+      setIsFiltered(true);
+    } else {
+      setIsFiltered(false);
+    }
+  };
+
+  console.log(groupsList);
 
   return (
     <Container openSidebar={openSidebar}>
       <section>
         <header>
-          <h2>Meus Grupos</h2>
+          <h2> Grupos </h2>
           <AddButton
             onClick={() => {
               setModalOpen(true);
@@ -52,19 +52,20 @@ const ListGroupsCard = () => {
         </header>
         <div>
           <TextField
-            onChange={(ev) => {
+            onClick={(ev) => {
               setText(ev.target.value);
+              filterGroups();
             }}
-            label="Pesquisar em meus grupos"
+            label="Pesquisar Grupos"
           />
           <SearchIcon />
         </div>
         <ListCards>
-          {!!text
-            ? filteredGroups.map((group) => (
+          {!isFiltered
+            ? groupsList.map((group) => (
                 <CardGroup key={group.id} group={group} />
               ))
-            : myGroupsList.map((group) => (
+            : filteredGroups.map((group) => (
                 <CardGroup key={group.id} group={group} />
               ))}
         </ListCards>
