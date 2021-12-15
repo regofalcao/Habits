@@ -1,5 +1,17 @@
 import styled from "styled-components";
 
+export const Button = styled.button`
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  font-size: bold;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 10rem;
+  border-radius: 5px;
+  background-color: #4348de;
+`;
 export const Container = styled.main`
   display: flex;
   border-radius: 8px;
@@ -11,11 +23,23 @@ export const Container = styled.main`
   background-color: var(--bege);
   flex-direction: column;
   box-sizing: border-box;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #c4c4c4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #11995e;
+    border-radius: 20px;
+    border: 3px solid #11995e;
+  }
 
   section {
     display: flex;
     flex-direction: column;
-
     header {
       display: flex;
       justify-content: space-between;
