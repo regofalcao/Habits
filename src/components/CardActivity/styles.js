@@ -23,7 +23,7 @@ export const Container = styled.div`
 
     h3 {
       font-size: 1.2rem;
-      min-width: 90%;
+      min-width: 75%;
     }
   }
   span {

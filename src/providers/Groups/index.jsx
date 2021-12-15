@@ -36,9 +36,9 @@ export const GroupsProvider = ({ children }) => {
         localStorage.setItem("@kenzieHabits:groups", JSON.stringify(myGroups));
         setMyGroupsList(myGroups);
       })
-      .catch((err) =>
-        toast.error("Erro! Não foi possível atualizar sua lista de grupos")
-      );
+      .catch((err) => {
+        toast.error("Erro! Não foi possível atualizar sua lista de grupos");
+      });
   };
 
   const goToNextPage = (pageNumber) => {
