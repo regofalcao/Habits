@@ -2,16 +2,28 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   display: flex;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 20px 12px;
   border: 1px solid var(--black);
   opacity: ${(props) => props.openSidebar && "0.9"};
-  min-height: 80vh;
+  max-height: 80vh;
   width: 95%;
   background-color: var(--bege);
   flex-direction: column;
   box-sizing: border-box;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
 
+  ::-webkit-scrollbar-track {
+    background: #c4c4c4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #11995e;
+    border-radius: 20px;
+    border: 3px solid #11995e;
+  }
   section {
     display: flex;
     flex-direction: column;
@@ -65,9 +77,12 @@ export const Container = styled.main`
   }
 
   @media screen and (min-width: 900px) {
-    margin-top: 20px;
+    margin-top: 30px;
     width: 80%;
+    margin-bottom: 20px;
+    max-height: 580px;
     background-color: rgba(251, 247, 236, 0.8);
+
     section {
       header {
         justify-content: flex-end;

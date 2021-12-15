@@ -1,8 +1,7 @@
 import Header from "../../components/Header";
 import SideBar from "../../components/SideBar";
 import ListGroupsCard from "../../components/ListGroupsCards";
-import { useOpenSideBar } from "../../providers/OpenSideBar";
-import { Container, Content, Background } from "./styles";
+import { Container, Background } from "./styles";
 
 import ModalAddGroup from "../../components/ModalCreateGroup";
 

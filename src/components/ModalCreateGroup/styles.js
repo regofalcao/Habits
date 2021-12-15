@@ -7,7 +7,7 @@ export const Form = styled.form`
   justify-content: space-around;
   width: 90%;
   height: 500px;
-  margin-top: 20px;
+  margin-top: 10px;
 
   input,
   p,
@@ -72,5 +72,12 @@ export const SectionButton = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100px;
+  justify-content: space-between;
+`;
+
+export const InputArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 190px;
   justify-content: space-between;
 `;

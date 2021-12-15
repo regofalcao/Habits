@@ -9,17 +9,10 @@ export const Container = styled.div`
   min-height: 80vh;
   display: flex;
   flex-direction: column;
-`;
-
-export const Content = styled.div`
-  display: flex;
-  width: 100vw;
-
-  margin-top: 20px;
 
   @media screen and (min-width: 900px) {
-    margin-top: 0;
-    width: 100%;
+    margin-left: 264px;
+    width: 74vw;
   }
 `;
 
@@ -33,7 +26,6 @@ export const Background = styled.div`
     display: flex;
     justify-content: center;
     min-height: 85vh;
-    margin-left: 208px;
     background-image: url(${BackgroundImage});
     background-size: 370px;
     background-position: bottom 50px right;

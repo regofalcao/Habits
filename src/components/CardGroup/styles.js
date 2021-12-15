@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.li`
-  /* height: 75px; */
   cursor: pointer;
   width: 100%;
   display: flex;
@@ -56,6 +55,7 @@ export const DescriptionArea = styled.section`
   section {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     height: 30px;
     h2 {
       line-height: 28px;
@@ -67,6 +67,14 @@ export const DescriptionArea = styled.section`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+
+    > svg {
+      color: #333;
+
+      &:hover {
+        filter: contrast(10%);
+      }
     }
 
     display: flex;
