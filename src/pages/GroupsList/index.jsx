@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
-import ListGroupsCard from "../../components/ListGroups";
+import ListGroups from "../../components/ListGroups";
 import SideBar from "../../components/SideBar";
-import { Container, Content, Background } from "../MyGroups/styles";
+import { Container, Content, Background } from "./styles";
 import ModalAddGroup from "../../components/ModalCreateGroup";
 import { useOpenModal } from "../../providers/OpenModal";
 
@@ -14,7 +14,7 @@ const GroupList = () => {
       <ModalAddGroup />
       <Container isOpen={modalOpen}>
         <Background>
-          <ListGroupsCard />
+          <ListGroups />
         </Background>
       </Container>
     </>

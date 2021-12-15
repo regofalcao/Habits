@@ -18,9 +18,9 @@ export const GroupsProvider = ({ children }) => {
   const [groupsList, setGroupsList] = useState([]);
   const [myGroupsList, setMyGroupsList] = useState([]);
   const [searchList, setSearchList] = useState([]);
-  const [nextPage] = useState("");
+  const [nextPage] = useState(1);
   const [previousPage] = useState("");
-  const [pageNumber, setPageNumber] = useState(5);
+  const [pageNumber, setPageNumber] = useState(1);
   const [currentId, setCurrentId] = useState(0);
 
   const getMyGroups = () => {
@@ -42,28 +42,30 @@ export const GroupsProvider = ({ children }) => {
   };
 
   const goToNextPage = (pageNumber) => {
-    if (nextPage) {
+    if (pageNumber === "NULL") {
+      setPageNumber(pageNumber);
+    } else {
       setPageNumber(pageNumber + 1);
     }
   };
 
   const goToPreviousPage = (pageNumber) => {
-    if (previousPage) {
+    if (pageNumber > 1) {
       setPageNumber(pageNumber - 1);
     }
   };
 
   const searchGroups = (string) => {
     api
-      .get(`/groups/search=${string}`, {
+      .get(`/groups/?search=${string}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const searchList = response.data;
+        const { results } = response.data;
 
-        setSearchList(searchList);
+        setSearchList(results);
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };
@@ -144,7 +146,7 @@ export const GroupsProvider = ({ children }) => {
 
   const subscribeToAgroup = (groupId) => {
     api
-      .post(`/groups/${groupId}/subscribe`, {
+      .post(`/groups/${groupId}/subscribe/`, groupId, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
