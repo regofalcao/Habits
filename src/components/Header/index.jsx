@@ -10,8 +10,8 @@ const Header = () => {
 
   return (
     <Container>
-      <Logo />
       <MenuIcon onClick={() => setOpenSidebar(!openSidebar)} />
+      <Logo />
     </Container>
   );
 };

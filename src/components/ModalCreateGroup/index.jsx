@@ -81,16 +81,30 @@ const ModalAddGroup = () => {
     unsubscribeToAgroup(currentId);
   };
 
+<<<<<<< HEAD
+=======
+  const { setModalOpen } = useOpenModal();
+
+  const closeGroup = () => {
+    setModalOpen(false);
+    reset();
+  };
+
+>>>>>>> feature/myGroups-adjustments
   return (
     <ModalDefault isOpen={modalOpen} setIsOpen={handleModal}>
       <Header>
         <h2>{editGroup ? "Editar Grupo" : "Cadastrar Grupo"}</h2>
+<<<<<<< HEAD
         <CloseIcon
           onClick={() => {
             handleModal();
             reset();
           }}
         />
+=======
+        <CloseIcon onClick={closeGroup} />
+>>>>>>> feature/myGroups-adjustments
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextField
@@ -143,7 +157,9 @@ const ModalAddGroup = () => {
           <SubmitButtons greenColor type="submit">
             {editGroup ? "Salvar alterações" : "Criar Grupo"}
           </SubmitButtons>
-          <SubmitButtons onClick={() => editGroup && deleteGroup()}>
+          <SubmitButtons
+            onClick={() => (editGroup ? deleteGroup() : closeGroup())}
+          >
             {editGroup ? "Excluir" : "Fechar"}
           </SubmitButtons>
         </SectionButton>

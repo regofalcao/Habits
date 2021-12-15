@@ -11,7 +11,6 @@ export const Container = styled.aside`
   padding-top: 1rem;
 
   section {
-    /* margin-top: 20px; */
     width: 90%;
     display: flex;
     margin-left: 12px;

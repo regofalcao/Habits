@@ -78,6 +78,8 @@ export const SectionButton = styled.div`
 export const InputArea = styled.div`
   display: flex;
   flex-direction: column;
-  height: 190px;
-  justify-content: space-between;
+  height: 210px;
+  gap: 70px;
+  margin-bottom: 10px;
+  /* justify-content: space-around; */
 `;
