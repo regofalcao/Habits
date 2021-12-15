@@ -9,6 +9,7 @@ export const useOpenModal = () => {
 
 export const OpenModalProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [editGroup, setEditGroup] = useState(false);
   const [editGoal, setEditGoal] = useState(false);
   const [editActivity, setEditActivity] = useState(false);
   const [openActivityModal, setOpenActivityModal] = useState(false);
@@ -34,6 +35,8 @@ export const OpenModalProvider = ({ children }) => {
     <OpenModalContext.Provider
       value={{
         modalOpen,
+        editGroup,
+        setEditGroup,
         setModalOpen,
         handleModal,
         handleActivityModal,

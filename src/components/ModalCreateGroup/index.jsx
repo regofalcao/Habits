@@ -96,7 +96,6 @@ const ModalAddGroup = () => {
             reset();
           }}
         />
-        <CloseIcon onClick={closeGroup} />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextField
