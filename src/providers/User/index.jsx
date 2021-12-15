@@ -62,7 +62,7 @@ export const UserProvider = ({ children }) => {
 
   const getMyHabits = () => {
     api
-      .get("/habits/personal", {
+      .get("/habits/personal/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -107,7 +107,11 @@ export const UserProvider = ({ children }) => {
 
   const updateHabit = (data, habitId) => {
     api
-      .patch(`/habits/${habitId}/`, data)
+      .patch(`/habits/${habitId}/`, data,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         toast.success("Hábito atualizado!");
         getMyHabits();
@@ -119,8 +123,15 @@ export const UserProvider = ({ children }) => {
 
   const deleteHabit = (habitId) => {
     api
-      .delete(`/habits/${habitId}`)
-      .then(toast.success("Removido!"))
+      .delete(`/habits/${habitId}/`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        toast.success("Removido!");
+        getMyHabits();
+      })
       .catch((err) => toast.error("Erro! Não foi possível deletar o hábito."));
   };
 

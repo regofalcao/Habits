@@ -13,10 +13,13 @@ import * as yup from "yup"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useUser } from "../../providers/User";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-const ModalCreateHabitis = ({setOpemModal}) => {
+const ModalCreateHabitis = ({setOpemModal, setEditiHabits, editHabits}) => {
+
+    const {deleteHabit, createNewHabit, updateHabit} = useUser();
 
     const Schema = yup.object().shape({
         title: yup.string().required("Nome do Habito obrigatório"),
@@ -34,23 +37,61 @@ const ModalCreateHabitis = ({setOpemModal}) => {
             .nullable(),
     });
 
-    const {register, handleSubmit, formState:{errors}} = useForm(
-        {resolver: yupResolver(Schema)}
+    const {register, handleSubmit, formState:{errors}, reset} = useForm(
+        {resolver: !editHabits && yupResolver(Schema)}
     );
 
     const onSubmit = (date) => {
+        reset();
+
         console.log(date);
-    }
+
+        if (!editHabits){
+            createNewHabit(date);
+        };
+
+        if (editHabits) {
+            if (date.title === ""){
+                delete date.title;
+            };
+            if (date.category === null){
+                delete date.category;
+            };
+            if (date.difficulty === null){
+                delete date.difficulty;
+            };
+            if (date.frequency === null){
+                delete date.frequency;
+            };
+            updateHabit(date, editHabits[0]);
+        };
+        closeEditiHabits()
+    };
 
     
+    const deleteHabtisFunction = () => {
+        deleteHabit(editHabits[0]);
+        closeEditiHabits();
+    };
+
+    const closeEditiHabits = () => {
+        setOpemModal(false);
+        setEditiHabits('');
+    };
+
     return <Conteiner>
         <ModalConteiner>
             <form  onSubmit = {handleSubmit(onSubmit)}>
                 <Header>
-                    <p>Criar novo Habito</p>
-                <CloseIcon onClick = {() => setOpemModal(false)} />
+                    {editHabits ? 
+                        <p>Editar hábito: {editHabits[1].slice(0,1).toUpperCase().concat(editHabits[1].slice(1))}</p>
+                        :
+                        <p>Criar novo Habito</p>
+                    }
+                <CloseIcon onClick = {closeEditiHabits} />
                 </Header>
                 <TextField  fullWidth
+                            size = "small"
                             {...register("title")}
                             label = "Nome Do Habito" 
                             error={!!errors.title}
@@ -72,7 +113,7 @@ const ModalCreateHabitis = ({setOpemModal}) => {
                         <ButtonRadio    register = {register}
                                         text = "Lazer"
                                         name = "category"
-                                        value = "tazer"/>
+                                        value = "lazer"/>
                         <ButtonRadio    register = {register}
                                         text = "Trabalho"
                                         name = "category"
@@ -105,7 +146,7 @@ const ModalCreateHabitis = ({setOpemModal}) => {
                         <ButtonRadio    register = {register}
                                         text = "Diaria"
                                         name = "frequency"
-                                        value = "diaria"/>
+                                        value = "diária"/>
                         <ButtonRadio    register = {register}
                                         text = "Semanal"
                                         name = "frequency"
@@ -120,10 +161,22 @@ const ModalCreateHabitis = ({setOpemModal}) => {
                                         value = "anual"/>
                     </div>                
                 </Section>        
-                <ButtonConteiner>
-                    <SubmitButtons greenColor type = "submit" >Salvar alterações</SubmitButtons>
-                    <SubmitButtons> Excluir </SubmitButtons>
-                </ButtonConteiner>
+                {!editHabits ? 
+                    <ButtonConteiner>
+                        <SubmitButtons  greenColor 
+                                        type = "submit" >Criar Hábito
+                        </SubmitButtons>
+                    </ButtonConteiner>
+                    :
+                    <ButtonConteiner>
+                        <SubmitButtons  greenColor 
+                                        type = "submit" >Atualizar Hábito
+                        </SubmitButtons>
+                        <SubmitButtons type = "button" 
+                                        onClick = {deleteHabtisFunction}>Deletar
+                        </SubmitButtons>
+                    </ButtonConteiner>
+                    }
             </form>
         </ModalConteiner>
     </Conteiner>

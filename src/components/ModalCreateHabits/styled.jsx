@@ -15,7 +15,7 @@ export const Conteiner = styled.div`
 export const ModalConteiner = styled.div`
     position:absolute;
     width:95%;
-    height:92vh;
+    height: 92vh;
     background-color:#FFF;
     border-radius: 10px;
     padding: 10px;
@@ -33,19 +33,22 @@ export const Section = styled.section`
     flex-wrap: wrap;
     align-items: center;
 
-    height: 100px;
     margin: 10px 0 10px 0;
   
     div{
-
+        
         display:flex;
         flex-wrap: wrap;
-        justify-content:space-between;
+        justify-content:space-around;
     }
     
     @media screen and (min-width:650px){
         align-items: inherit;
         flex-direction:column;
+
+        div{
+            height: 6.6vh;
+        }
        
     }
 `
@@ -55,6 +58,12 @@ export const Header = styled.div`
     margin: 0 0 10px 0;
     justify-content: space-between;
     height: 20px;
+
+    p{
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        overflow: hidden;
+    }
 
     @media screen and (min-width: 650px){
         margin: 0 0 25px 0;

@@ -13,7 +13,7 @@ export const CardConteiner = styled.div`
 
 export const IconConteiner = styled.div`
     width: 25%;
-    background-color:${(props) =>   props.category.toLocaleLowerCase() === "sáude" ?
+    background-color:${(props) =>   props.category.toLocaleLowerCase() === "saúde" ?
                                         "#800080" : 
                                     props.category.toLocaleLowerCase() === "esporte" ?
                                         "#C03838" :  
@@ -59,7 +59,7 @@ export const Name = styled.div`
     }
     `
 export const Category = styled.div`
-    background-color:${(props) =>   props.category.toLocaleLowerCase() === "sáude" ?
+    background-color:${(props) =>   props.category.toLocaleLowerCase() === "saúde" ?
                                         "#eac7ea" : 
                                     props.category.toLocaleLowerCase() === "esporte" ?
                                         "#efd7d7" :  
@@ -67,7 +67,7 @@ export const Category = styled.div`
                                         "#daf2e0" : 
                                     props.category.toLocaleLowerCase() === "trabalho" ?
                                         "#bebfd6" : "#e5e5e5" };
-    color:${(props) =>   props.category.toLocaleLowerCase() === "sáude" ?
+    color:${(props) =>   props.category.toLocaleLowerCase() === "saúde" ?
                                         "#800080" : 
                                     props.category.toLocaleLowerCase() === "esporte" ?
                                         "#C03838" :  
@@ -93,7 +93,7 @@ export const Bar = styled.div`
 
 export const ProgressBar = styled.div`
     width: ${props => props.progress}%;
-    background-color:${(props) =>   props.category.toLocaleLowerCase() === "sáude" ?
+    background-color:${(props) =>   props.category.toLocaleLowerCase() === "saúde" ?
                                         "#800080" : 
                                     props.category.toLocaleLowerCase() === "esporte" ?
                                         "#C03838" :  
@@ -115,7 +115,7 @@ export const CheckinConteiner = styled.i`
     font-size:15px;
     svg{
         font-size:40px;
-        color:${(props) =>   props.category.toLocaleLowerCase() === "sáude" ?
+        color:${(props) =>   props.category.toLocaleLowerCase() === "saúde" ?
                                         "#800080" : 
                                     props.category.toLocaleLowerCase() === "esporte" ?
                                         "#C03838" :  
