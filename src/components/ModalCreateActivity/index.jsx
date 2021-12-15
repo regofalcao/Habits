@@ -5,6 +5,7 @@ import { useOpenModal } from "../../providers/OpenModal";
 import { TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { Form, Header, SectionButton } from "./styles";
+import { useActivities } from "../../providers/Activities";
 
 import CloseIcon from "@mui/icons-material/Close";
 import SubmitButtons from "../SubmitButtons";
@@ -13,18 +14,15 @@ import ModalDefault from "../ModalDefault";
 
 import * as yup from "yup";
 
-const ModalCreateActivity = () => {
+const ModalCreateActivity = ({ groupId }) => {
+  const { createActivity, updateActivity } = useActivities();
+
   const schema = yup.object().shape({
     title: yup.string().required("Nome da atividade obrigatório"),
   });
 
-  const {
-    openActivityModal,
-    setOpenActivityModal,
-    handleModal,
-    editActivity,
-    setEditActivity,
-  } = useOpenModal();
+  const { openActivityModal, handleModal, editActivity, activityId } =
+    useOpenModal();
 
   const {
     control,
@@ -39,13 +37,13 @@ const ModalCreateActivity = () => {
   const onSubmit = (data) => {
     const { realization_time } = data;
     const isoDate = realization_time.toISOString();
-
-    console.log({ ...data, realization_time: isoDate });
-    reset();
+    const newData = { ...data, realization_time: isoDate };
 
     editActivity
-      ? toast.success("Atividade editada com sucesso!")
-      : toast.success("Atividade cadastrada com sucesso!");
+      ? updateActivity(newData, activityId, groupId)
+      : createActivity(newData, groupId);
+
+    reset();
   };
 
   return (

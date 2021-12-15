@@ -1,7 +1,8 @@
 import { Edit } from "@mui/icons-material";
 import { Container } from "./styles";
+import { useOpenModal } from "../../providers/OpenModal";
 
-const CardActivitie = (props) => {
+const CardActivity = (props) => {
   const style = {
     color: "#4348DE",
     "&:hover": {
@@ -11,7 +12,14 @@ const CardActivitie = (props) => {
     },
   };
 
-  const handleButton = () => {};
+  const { setOpenActivityModal, setEditActivity, setActivityId } =
+    useOpenModal();
+
+  const handleButton = (activityId) => {
+    setOpenActivityModal(true);
+    setEditActivity(true);
+    setActivityId(activityId);
+  };
 
   const formateTheDate = () => {
     const isoDate = props.realization_time.toString();
@@ -28,11 +36,11 @@ const CardActivitie = (props) => {
     <Container>
       <div>
         <h3>{props.title}</h3>
-        <Edit sx={style} onClick={handleButton} />
+        <Edit sx={style} onClick={() => handleButton(props.id)} />
       </div>
       <span>{formateTheDate()}</span>
     </Container>
   );
 };
 
-export default CardActivitie;
+export default CardActivity;

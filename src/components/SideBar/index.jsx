@@ -18,6 +18,7 @@ const SideBar = () => {
   const { openSidebar, isOwner } = useOpenSideBar();
 
   const { modalOpen } = useOpenModal();
+  const user = JSON.parse(localStorage.getItem("@kenzieHabits:user"));
 
   return (
     <>
@@ -25,7 +26,7 @@ const SideBar = () => {
         <Container>
           <section>
             <img src={UserImage} alt="user" />
-            <h2>Usuário</h2>
+            <h2>{user.username}</h2>
             {isOwner && <VerifiedIcon sx={{ color: "#E6AF2E" }} />}
           </section>
           <ul>
@@ -51,7 +52,7 @@ const SideBar = () => {
       <ContainerDesk modalOpen={modalOpen}>
         <section>
           <img src={UserImage} alt="user" />
-          <h2>Usuário</h2>
+          <h2>{user.username}</h2>
           {isOwner && <VerifiedIcon sx={{ color: "#E6AF2E" }} />}
         </section>
         <ul>
