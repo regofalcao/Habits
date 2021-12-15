@@ -6,125 +6,63 @@ import api from "../../services/api";
 import SideBar from "../../components/SideBar";
 import { TextField } from "@mui/material";
 import ModalCreateHabitis from "../../components/ModalCreateHabits"
+import { useUser } from "../../providers/User";
 
 const Dashboard = () => {
 
-  const token = useState(JSON.parse(localStorage.getItem("token")) || "");
-  const [habitsList, setHabitsList] = useState([{
-    id: 2607,
-    title: "Calistenia a tarde (15 minutos)",
-    category: "Sáude",
-    difficulty: "Muito díficil",
-    frequency: "ddswa",
-    achieved: false,
-    how_much_achieved: 90,
-    user: 673
-  },
-  {
-    id: 2607,
-    title: "batata",
-    category: "esporte",
-    difficulty: "Muito díficil",
-    frequency: "Mensal",
-    achieved: false,
-    how_much_achieved: 30,
-    user: 673
-  },{
-    id: 2607,
-    title: "Cenora",
-    category: "lazer",
-    difficulty: "Muito díficil",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 50,
-    user: 673
-  },
-  {
-    id: 2607,
-    title: "CeboLa",
-    category: "TRABALHO",
-    difficulty: "Muito díficil",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 30,
-    user: 673
-  },{
-    id: 2607,
-    title: "Abacate",
-    category: "VIAGEM",
-    difficulty: "Muito díficil",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 50,
-    user: 673
-  },
-  {
-    id: 2607,
-    title: "Calistenia a tarde (15 minutos)",
-    category: "Sáude",
-    difficulty: "Muito díficil",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 30,
-    user: 673
-  },{
-    id: 2607,
-    title: "Calistenia a tarde (15 minutos)",
-    category: "Sáude",
-    difficulty: "Muito díficil",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 50,
-    user: 673
-  },
-  {
-    id: 2607,
-    title: "Calistenia a tarde (15 minutos)",
-    category: "Sáude",
-    difficulty: "Muito díficil",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 30,
-    user: 673
-  },]);
+
+  const {getMyHabits, myHabitsList} = useUser();
+  
+  const [opemModal, setOpemModal] = useState(false);
+  const [editHabits, setEditiHabits] = useState("");
+
   const [userInput, setUserInput] = useState("");
   const [newList, setNewList] = useState([]);
-  const [opemModal, setOpemModal] = useState(false);
-console.log(opemModal)
-
+  
   useEffect(()=>{
-      const newListHabits = habitsList.filter((item) => (
-        item.title.toLocaleUpperCase() === userInput.toLocaleUpperCase()
+    const newListHabits = myHabitsList.filter((item) => (
+      item.title.toLocaleUpperCase() === userInput.toLocaleUpperCase()
       ))
       setNewList(newListHabits);
-  },[userInput])
-
-  useEffect(() => {
-    api
-      .post("/habits/personal/", {
-      Authorization: `Bearer ${token}`
-      })
-      .then(response => setHabitsList(response))
-  },[])
-
+    },[userInput])
+    
+    useEffect(() => {
+      getMyHabits();  
+    },[])
 
   return (
     <>
-      {opemModal &&  <ModalCreateHabitis setOpemModal = {setOpemModal} />}
+      {opemModal &&  <ModalCreateHabitis  setOpemModal = {setOpemModal}  
+                                          setEditiHabits = {setEditiHabits}
+                                          setOpemModal = {setOpemModal}
+                                          editHabits = {editHabits}/>}
       <Header />
       <SideBar/>
       <Conteiner>
+
         <CardsConteiner>
+
           <CardHeader>
             <p>Meus Habitos</p>
             <div onClick = {() => setOpemModal(true)}  >+</div>
           </CardHeader>
-          <TextField  
+
+          <TextField  size = "small"
                       fullWidth
                       label="Pesquisar em meus habitos" 
                       onChange = {e => setUserInput(e.target.value)} />
-          {userInput ? <CardHabits habits = {newList}/> : <CardHabits habits = {habitsList} />} 
+
+          {userInput ? 
+              <CardHabits habits = {newList}
+                          setEditiHabits = {setEditiHabits}
+                          setOpemModal = {setOpemModal}/>
+              : 
+              <CardHabits habits = {myHabitsList} 
+                          setEditiHabits = {setEditiHabits}
+                          setOpemModal = {setOpemModal}/>} 
+          
         </CardsConteiner>
+
       </Conteiner>
     </>
   );

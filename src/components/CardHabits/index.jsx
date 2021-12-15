@@ -16,10 +16,15 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import api from "../../services/api";
 import { useState } from "react";
+import {useUser} from "../../providers/User";
+import CloseIcon from '@mui/icons-material/Close';
+import Close from "@mui/icons-material/Close";
 
-const CardHabits = ({habits}) => {
+const CardHabits = ({habits, setEditiHabits, setOpemModal}) => {
     
-    const token = useState(JSON.parse(localStorage.getItem("token")) || "");
+    habits.sort((a,b) => b.how_much_achieved - a.how_much_achieved);
+
+    const {updateHabit, deleteHabit} = useUser();
 
     const updateHowMuchAchieved = (item) => {
         let howMuch = 0;
@@ -30,40 +35,37 @@ const CardHabits = ({habits}) => {
         howMuch = 4.24 : item.frequency.toLocaleLowerCase() === "anual" ? 
         howMuch = 20 : howMuch = 10;
         
-        if (item.how_much_achieved+howMuch >= 100) { 
-            console.log("100%")
-            item.how_much_achieved = 100
-            api.patch(`/habits/${item.id}`,
-                {   
-                    achieved: true,
-                    how_much_achieved: 100
-                },
-                {
-                    Authorization: `Bearer ${token}`
-                })
-                .then(response => console.log(response))
-            } if (item.how_much_achieved+howMuch < 100) {
-                console.log("ainda não")
-                item.how_much_achieved = item.how_much_achieved + howMuch
-                api.patch(`/habits/${item.id}`,
-                    {   
-                        how_much_achieved: item.how_much_achieved+howMuch
-                    },
-                    {
-                        Authorization: `Bearer ${token}`
-                    })
-                    .then(response => console.log(response)) 
-                }
+        if (item.how_much_achieved+howMuch >= 100) {         
+            const data = {
+                how_much_achieved: 100,
+                achieved: true  
+            };
+            updateHabit(data, item.id);
+            } 
+            if (item.how_much_achieved+howMuch < 100) {
+
+                const number = Math.round(item.how_much_achieved + howMuch)
+                const data = {
+                    how_much_achieved: number
+                };
+                updateHabit(data, item.id);
+            };
 
     }
+
+    const opemEditHabits = (id) => {
+        setOpemModal(true);
+        setEditiHabits(id);
+    };
 
     return(
         <Conteiner>
             {habits.map((item, index) => (
-                < CardConteiner key = {index}>
-                    <IconConteiner category = {item.category} >
+                <CardConteiner key = {index}>
+                    <IconConteiner  category = {item.category} 
+                                    onClick = {() => opemEditHabits([item.id, item.title])}>
                         {
-                        item.category.toLocaleLowerCase() === "sáude" ?
+                        item.category.toLocaleLowerCase() === "saúde" ?
                             <VolunteerActivismIcon/> : 
                         item.category.toLocaleLowerCase() === "esporte" ?
                             <SkateboardingIcon/> :
@@ -77,20 +79,26 @@ const CardHabits = ({habits}) => {
                     <BodyConteiner>
                         <ConteinerDiscription>
                             <div>
-                                <Name>{item.title}</Name>
+                                <Name>{item.title.slice(0,1).toUpperCase().concat(item.title.slice(1))}</Name>
                                 <Category   category = {item.category} >
-                                    {item.category}
+                                    {item.category.slice(0,1).toUpperCase().concat(item.category.slice(1))}
                                 </Category>
                             </div>
-                            <CheckinConteiner   category = {item.category} 
-                                                onClick = {() => updateHowMuchAchieved(item)} >
-                                <CheckCircleIcon/>
-                            </CheckinConteiner>
+                            {item.how_much_achieved === 100 ?
+                                <CheckinConteiner   category = {item.category} 
+                                                    onClick = {() => deleteHabit(item.id)} >
+                                    <Close/>
+                                </CheckinConteiner>
+                                :
+                                <CheckinConteiner   category = {item.category} 
+                                                     onClick = {() => updateHowMuchAchieved(item)} >
+                                    <CheckCircleIcon/>
+                                </CheckinConteiner>}
                         </ConteinerDiscription>
                         <Bar>
                             <ProgressBar    progress = {item.how_much_achieved} 
                                             category = {item.category}>
-                                <p>{item.how_much_achieved}%</p>
+                                <p>{item.how_much_achieved.toFixed()}%</p>
                             </ProgressBar>
                         </Bar>
                     </BodyConteiner>
