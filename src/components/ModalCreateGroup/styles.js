@@ -81,5 +81,4 @@ export const InputArea = styled.div`
   height: 210px;
   gap: 70px;
   margin-bottom: 10px;
-  /* justify-content: space-around; */
 `;
