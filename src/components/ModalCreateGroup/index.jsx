@@ -82,16 +82,16 @@ const ModalAddGroup = () => {
 
   const { setModalOpen } = useOpenModal();
 
+  const closeGroup = () => {
+    setModalOpen(false);
+    reset();
+  };
+
   return (
     <ModalDefault isOpen={modalOpen} setIsOpen={handleModal}>
       <Header>
         <h2>{editGroup ? "Editar Grupo" : "Cadastrar Grupo"}</h2>
-        <CloseIcon
-          onClick={() => {
-            setModalOpen(false);
-            reset();
-          }}
-        />
+        <CloseIcon onClick={closeGroup} />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <InputArea>
@@ -146,7 +146,9 @@ const ModalAddGroup = () => {
           <SubmitButtons greenColor type="submit">
             {editGroup ? "Salvar alterações" : "Criar Grupo"}
           </SubmitButtons>
-          <SubmitButtons onClick={() => editGroup && deleteGroup()}>
+          <SubmitButtons
+            onClick={() => (editGroup ? deleteGroup() : closeGroup())}
+          >
             {editGroup ? "Excluir" : "Fechar"}
           </SubmitButtons>
         </SectionButton>

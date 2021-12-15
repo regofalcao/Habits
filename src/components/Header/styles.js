@@ -9,15 +9,18 @@ export const Container = styled.header`
   border-bottom: 2px solid #8f8389;
 
   > div {
-    margin-left: 20px;
+    margin-right: 20px;
   }
 
   svg {
-    margin-right: 25px;
+    margin-left: 20px;
     cursor: pointer;
   }
 
   @media screen and (min-width: 900px) {
+    > div {
+      margin-left: 20px;
+    }
     svg {
       display: none;
     }
