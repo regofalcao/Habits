@@ -9,18 +9,25 @@ export const useOpenModal = () => {
 
 export const OpenModalProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [editGroup, setEditGroup] = useState(false);
+  const [editGoal, setEditGoal] = useState(false);
   const [editActivity, setEditActivity] = useState(false);
   const [openActivityModal, setOpenActivityModal] = useState(false);
   const [openGoalModal, setOpenGoalModal] = useState(false);
   const [activityId, setActivityId] = useState("");
+  const [goalId, setGoalId] = useState("");
 
   const handleModal = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const handleActivityModal = () => {
     setOpenActivityModal(!openActivityModal);
-    setOpenGoalModal(!openGoalModal);
     setEditActivity(!editActivity);
-    setEditGroup(!editGroup);
+  };
+
+  const handleGoalModal = () => {
+    setOpenGoalModal(!openGoalModal);
+    setEditGoal(!editGoal);
   };
 
   return (
@@ -29,8 +36,10 @@ export const OpenModalProvider = ({ children }) => {
         modalOpen,
         setModalOpen,
         handleModal,
-        editGroup,
-        setEditGroup,
+        handleActivityModal,
+        handleGoalModal,
+        editGoal,
+        setEditGoal,
         editActivity,
         setEditActivity,
         openActivityModal,
@@ -39,6 +48,8 @@ export const OpenModalProvider = ({ children }) => {
         setActivityId,
         openGoalModal,
         setOpenGoalModal,
+        goalId,
+        setGoalId,
       }}
     >
       {children}

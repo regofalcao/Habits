@@ -58,9 +58,9 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => toast.error("Não foi possível criar a meta"));
   };
 
-  const updateGoal = (goalId, groupId) => {
+  const updateGoal = (data, goalId, groupId) => {
     api
-      .patch(`/goals/${goalId}/`, {
+      .patch(`/goals/:${goalId}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

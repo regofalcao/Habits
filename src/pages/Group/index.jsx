@@ -22,6 +22,7 @@ import AddButton from "../../components/AddButton";
 import CardActivity from "../../components/CardActivity";
 import CardMember from "../../components/CardMember";
 import ModalCreateActivity from "../../components/ModalCreateActivity";
+import ModalCreateGoal from "../../components/ModalCreateGoal";
 
 import { useGroups } from "../../providers/Groups";
 import { useUser } from "../../providers/User";
@@ -213,7 +214,10 @@ const Group = () => {
     if (type === "activity") {
       setOpenActivityModal(true);
     } else {
+      console.log("ok, openmodal");
+      console.log(openGoalModal);
       setOpenGoalModal(true);
+      console.log(openGoalModal);
     }
   };
 
@@ -222,6 +226,7 @@ const Group = () => {
       <Header />
       <SideBar />
       <ModalCreateActivity isOpen={openActivityModal} groupId={id} />
+      <ModalCreateGoal isOpen={openGoalModal} groupId={id} />
       <Container>
         <TopContainer>
           <h3>
@@ -271,10 +276,10 @@ const Group = () => {
                       difficulty={goal.difficulty}
                       how_much_achieved={goal.how_much_achieved}
                       achieved={goal.achieved}
-                    />;
+                    />
                   ))} */}
                 </MetasDisplay>
-                <AddButton />
+                <AddButton onClick={() => handleModalButton("goal")} />
               </SectionTitle>
             </GoalsSection>
           </LeftSideContainer>

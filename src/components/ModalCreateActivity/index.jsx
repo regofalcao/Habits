@@ -21,7 +21,7 @@ const ModalCreateActivity = ({ groupId }) => {
     title: yup.string().required("Nome da atividade obrigatório"),
   });
 
-  const { openActivityModal, handleModal, editActivity, activityId } =
+  const { openActivityModal, handleActivityModal, editActivity, activityId } =
     useOpenModal();
 
   const {
@@ -47,12 +47,12 @@ const ModalCreateActivity = ({ groupId }) => {
   };
 
   return (
-    <ModalDefault isOpen={openActivityModal} setIsOpen={handleModal}>
+    <ModalDefault isOpen={openActivityModal} setIsOpen={handleActivityModal}>
       <Header>
         <h2>{editActivity ? "Editar atividade" : "Cadastrar atividade"}</h2>
         <CloseIcon
           onClick={() => {
-            handleModal();
+            handleActivityModal();
             reset();
           }}
         />
