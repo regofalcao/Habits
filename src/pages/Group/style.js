@@ -84,7 +84,20 @@ export const LeftSideContainer = styled.div`
 export const ActivitiesSection = styled.section`
   border: 1px solid var(--black);
   padding: 5px 12px;
-  min-height: 30vh;
+  height: 35vh;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #c4c4c4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #11995e;
+    border-radius: 20px;
+    border: 3px solid #11995e;
+  }
   margin-bottom: 1rem;
 `;
 
@@ -92,13 +105,25 @@ export const ActivitiesCardDisplay = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
-  overflow-y: scroll;
+  overflow-x: scroll;
   gap: 0.5rem;
   padding-bottom: 1rem;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #c4c4c4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #11995e;
+    border-radius: 20px;
+    border: 3px solid #11995e;
+  }
 
   @media screen and (min-width: 900px) {
     flex-wrap: wrap;
-    overflow-y: unset;
+    overflow-x: unset;
     justify-content: center;
   }
 `;
@@ -107,7 +132,7 @@ export const SectionTitle = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   h2 {
     flex-grow: 1;
     text-align: left;
@@ -118,8 +143,21 @@ export const SectionTitle = styled.div`
 export const GoalsSection = styled.section`
   border: 1px solid var(--black);
   padding: 5px 12px;
-  min-height: 30vh;
+  height: 35vh;
+  overflow-x: scroll;
   margin-bottom: 1rem;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #c4c4c4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #11995e;
+    border-radius: 20px;
+    border: 3px solid #11995e;
+  }
 `;
 
 export const MembersSection = styled.section`
@@ -131,6 +169,18 @@ export const MembersSection = styled.section`
 
   overflow-y: scroll;
   align-items: center;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #c4c4c4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #11995e;
+    border-radius: 20px;
+    border: 3px solid #11995e;
+  }
 
   @media screen and (min-width: 900px) {
     display: flex;
@@ -146,7 +196,6 @@ export const MembersSection = styled.section`
 export const MembersCardDisplay = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   gap: 0.5rem;
   padding-bottom: 1rem;
 `;
