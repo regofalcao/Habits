@@ -93,25 +93,6 @@ const ModalAddGroup = () => {
         />
       </Header>
       <Form onSubmit={handleSubmit(onSubmit)}>
-<<<<<<< HEAD
-        <InputArea>
-          <TextField
-            sx={{ height: "10px" }}
-            {...register("name")}
-            label="Nome do grupo"
-            error={!!errors.name}
-            helperText={errors.name?.message}
-          />
-          <TextField
-            {...register("description")}
-            label="Descrição do grupo"
-            multiline
-            rows={4}
-            error={!!errors.description}
-            helperText={errors.description?.message}
-          />
-        </InputArea>
-=======
         <TextField
           sx={{ height: "10px" }}
           {...register("name")}
@@ -127,7 +108,6 @@ const ModalAddGroup = () => {
           error={!!errors.description}
           helperText={errors.description?.message}
         />
->>>>>>> feature/modal-activity
         <TitleCategory>
           <h3>Selecionar Categoria:</h3>
           {!!errors.category && <p>{errors.category.message}</p>}
