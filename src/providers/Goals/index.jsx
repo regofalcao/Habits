@@ -17,19 +17,23 @@ export const GoalsProvider = ({ children }) => {
 
   const [goalsList, setGoalsList] = useState([]);
 
-  const getGoals = (groupId) => {
+  const getGroupGoals = (groupId) => {
     api
-      .get(`/goals/?group=${groupId}`, {
+      .get("/groups/subscriptions/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const { results } = response.data;
-
-        setGoalsList(results);
+        const searchedGroup = response.data.find(
+          (group) => group.id === groupId
+        );
+        const { goals } = searchedGroup;
+        setGoalsList(goals);
       })
-      .catch((err) => toast.error("Ocorreu um erro na solicitação"));
+      .catch((err) => {
+        toast.error("Erro! Não foi possível atualizar sua lista de grupos");
+      });
   };
 
   const createGoal = (data, groupId) => {
@@ -52,7 +56,7 @@ export const GoalsProvider = ({ children }) => {
 
         setGoalsList(newGoalList);
 
-        getGoals();
+        getGroupGoals(groupId);
         toast.success("Meta criada");
       })
       .catch((err) => toast.error("Não foi possível criar a meta"));
@@ -66,7 +70,7 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        getGoals(groupId);
+        getGroupGoals(groupId);
         toast.success("Meta atualizada");
       })
       .catch((err) => {
@@ -97,7 +101,7 @@ export const GoalsProvider = ({ children }) => {
     <GoalsContext.Provider
       value={{
         goalsList,
-        getGoals,
+        getGroupGoals,
         createGoal,
         updateGoal,
         deleteGoal,

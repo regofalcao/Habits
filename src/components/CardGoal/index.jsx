@@ -21,7 +21,6 @@ const CardGoal = (item) => {
   const handleButton = () => {};
 
   const updateHowMuchAchieved = (item) => {
-    console.log(item);
     let howMuch = 0;
 
     item.difficulty.toLocaleLowerCase() === "muito fácil"
@@ -37,14 +36,14 @@ const CardGoal = (item) => {
       : (howMuch = 11);
 
     if (item.how_much_achieved + howMuch >= 100) {
-      console.log("100%");
-      item.how_much_achieved = 100;
       const data = {
         achieved: true,
         how_much_achieved: 100,
       };
 
-      updateGoal(data, item.goalId, item.group, item.how_much_achieved);
+      console.log(data);
+
+      updateGoal(data, item.goalId, item.group);
       // api
       //   .patch(
       //     `/group/${item.group}/`,
@@ -59,13 +58,15 @@ const CardGoal = (item) => {
       //   .then((response) => console.log(response));
     }
     if (item.how_much_achieved + howMuch < 100) {
-      console.log("ainda não");
-      item.how_much_achieved = item.how_much_achieved + howMuch;
+      const newAchievedValue = item.how_much_achieved + howMuch;
       const data = {
-        achieved: true,
-        how_much_achieved: item.how_much_achieved + howMuch,
+        achieved: false,
+        how_much_achieved: newAchievedValue.toFixed(),
       };
-      updateGoal(data, item.goalId, item.group, item.how_much_achieved);
+
+      console.log(data);
+
+      updateGoal(data, item.goalId, item.group);
       // api
       //   .patch(
       //     `/group/${item.group}/`,
@@ -79,8 +80,7 @@ const CardGoal = (item) => {
       //   .then((response) => console.log(response));
     }
   };
-  console.log(`alguma coius`);
-  console.log(item);
+
   return (
     <Container>
       <div>

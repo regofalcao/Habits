@@ -44,7 +44,7 @@ const Group = () => {
 
   const history = useHistory();
   const { myGroupsList, editGroup, unsubscribeToAgroup } = useGroups();
-  const { goalsList, getGoals } = useGoals();
+  const { goalsList, getGroupGoals } = useGoals();
   const { getActivities, activitiesList } = useActivities();
   const { user } = useUser();
   const { isOwner, setIsOwner } = useOpenSideBar();
@@ -57,8 +57,7 @@ const Group = () => {
   const { id } = useParams();
   const groupId = parseInt(id);
 
-  const { name, creator, users_on_group } = groupInfo;
-  console.log(groupInfo);
+  const { name, creator, users_on_group, goals } = groupInfo;
 
   const {
     handleModal,
@@ -69,10 +68,6 @@ const Group = () => {
     setOpenGoalModal,
     modalOpen,
   } = useOpenModal();
-
-  // const getGroupInfo = () => {
-  //   setGroupInfo(myGroupsList.find((group) => group.id === groupId));
-  // };
 
   const exitDeleteButtonHandler = () => {
     unsubscribeToAgroup(groupId);
@@ -90,12 +85,13 @@ const Group = () => {
   }, []);
 
   useEffect(() => {
-    getGoals(groupId);
+    getGroupGoals(groupId);
   }, []);
 
   useEffect(() => {
     setGroupInfo(myGroupsList.find((group) => group.id === groupId));
-  }, [myGroupsList]);
+  }, [myGroupsList, goalsList]);
+  // console.log(groupInfo);
 
   useEffect(() => {
     creator && creator.id === user.id && setIsOwner(true);
@@ -163,9 +159,10 @@ const Group = () => {
                 <AddButton onClick={() => handleModalButton("goal")} />
               </SectionTitle>
               <GoalCardDisplay>
-                {goalsList &&
-                  goalsList.map((goal) => (
+                {goals &&
+                  goals.map((goal) => (
                     <CardGoal
+                      key={goal.id}
                       goalId={goal.id}
                       group={goal.group}
                       title={goal.title}
