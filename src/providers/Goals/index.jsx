@@ -17,7 +17,7 @@ export const GoalsProvider = ({ children }) => {
 
   const [goalsList, setGoalsList] = useState([]);
 
-  const getGoals = (groupId) => {
+  const getGroupGoals = (groupId) => {
     api
       .get("/groups/subscriptions/", {
         headers: {
@@ -25,31 +25,15 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        console.log(groupId);
-        console.log("lista", response.data);
-        const searchedGroup = response.data.forEach((group) =>
-          console.log(group)
+        const searchedGroup = response.data.find(
+          (group) => group.id === groupId
         );
         const { goals } = searchedGroup;
-        console.log("goals do grupo", goals);
         setGoalsList(goals);
       })
       .catch((err) => {
         toast.error("Erro! Não foi possível atualizar sua lista de grupos");
       });
-    // api
-    // .get(`/groups/${groupId}`, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    // .then((response) => {
-    //   const { results } = response.data;
-    //   console.log(results);
-
-    //   setGoalsList(results);
-    // })
-    // .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };
 
   const createGoal = (data, groupId) => {
@@ -72,7 +56,7 @@ export const GoalsProvider = ({ children }) => {
 
         setGoalsList(newGoalList);
 
-        getGoals();
+        getGroupGoals(groupId);
         toast.success("Meta criada");
       })
       .catch((err) => toast.error("Não foi possível criar a meta"));
@@ -86,7 +70,7 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        getGoals(groupId);
+        getGroupGoals(groupId);
         toast.success("Meta atualizada");
       })
       .catch((err) => {
@@ -117,7 +101,7 @@ export const GoalsProvider = ({ children }) => {
     <GoalsContext.Provider
       value={{
         goalsList,
-        getGoals,
+        getGroupGoals,
         createGoal,
         updateGoal,
         deleteGoal,

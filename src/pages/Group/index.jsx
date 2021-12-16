@@ -44,7 +44,7 @@ const Group = () => {
 
   const history = useHistory();
   const { myGroupsList, editGroup, unsubscribeToAgroup } = useGroups();
-  const { goalsList, getGoals } = useGoals();
+  const { goalsList, getGroupGoals } = useGoals();
   const { getActivities, activitiesList } = useActivities();
   const { user } = useUser();
   const { isOwner, setIsOwner } = useOpenSideBar();
@@ -85,7 +85,7 @@ const Group = () => {
   }, []);
 
   useEffect(() => {
-    getGoals(groupId);
+    getGroupGoals(groupId);
   }, []);
 
   useEffect(() => {
@@ -162,6 +162,7 @@ const Group = () => {
                 {goals &&
                   goals.map((goal) => (
                     <CardGoal
+                      key={goal.id}
                       goalId={goal.id}
                       group={goal.group}
                       title={goal.title}
