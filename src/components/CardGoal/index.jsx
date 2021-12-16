@@ -44,21 +44,10 @@ const CardGoal = (item) => {
       console.log(data);
 
       updateGoal(data, item.goalId, item.group);
-      // api
-      //   .patch(
-      //     `/group/${item.group}/`,
-      //     {
-      //       achieved: true,
-      //       how_much_achieved: 100,
-      //     },
-      //     {
-      //       Authorization: `Bearer ${token}`,
-      //     }
-      //   )
-      //   .then((response) => console.log(response));
     }
     if (item.how_much_achieved + howMuch < 100) {
       const newAchievedValue = item.how_much_achieved + howMuch;
+      console.log(item.how_much_achieved + howMuch);
       const data = {
         achieved: false,
         how_much_achieved: newAchievedValue.toFixed(),
@@ -67,17 +56,6 @@ const CardGoal = (item) => {
       console.log(data);
 
       updateGoal(data, item.goalId, item.group);
-      // api
-      //   .patch(
-      //     `/group/${item.group}/`,
-      //     {
-      //       how_much_achieved: item.how_much_achieved + howMuch,
-      //     },
-      //     {
-      //       Authorization: `Bearer ${token}`,
-      //     }
-      //   )
-      //   .then((response) => console.log(response));
     }
   };
 

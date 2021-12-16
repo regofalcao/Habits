@@ -57,7 +57,7 @@ const Group = () => {
   const { id } = useParams();
   const groupId = parseInt(id);
 
-  const { name, creator, users_on_group, goals } = groupInfo;
+  const { name, creator, users_on_group } = groupInfo;
 
   const {
     handleModal,
@@ -159,8 +159,8 @@ const Group = () => {
                 <AddButton onClick={() => handleModalButton("goal")} />
               </SectionTitle>
               <GoalCardDisplay>
-                {goals &&
-                  goals.map((goal) => (
+                {goalsList &&
+                  goalsList.map((goal) => (
                     <CardGoal
                       key={goal.id}
                       goalId={goal.id}
