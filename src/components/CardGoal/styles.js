@@ -15,15 +15,10 @@ export const Container = styled.div`
   border-radius: 3px;
   background-color: var(--light-gray);
 
-  div {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    width: 100%;
-
+ 
     h3 {
       font-size: 1.2rem;
-      min-width: 90%;
+      
     }
   }
 `;
@@ -64,20 +59,18 @@ export const CheckinConteiner = styled.i`
   font-size: 15px;
   svg {
     font-size: 40px;
-    color: (
-      ${(item) =>
-        item.difficulty.toLocaleLowerCase() === "muito fácil"
-          ? "#800080"
-          : item.difficulty.toLocaleLowerCase() === "fácil"
-          ? "#924100"
-          : item.difficulty.toLocaleLowerCase() === "médio"
-          ? "#C03838"
-          : item.difficulty.toLocaleLowerCase() === "difícil"
-          ? "#38C15D"
-          : item.difficulty.toLocaleLowerCase() === "muito difícil"
-          ? "#5baff9"
-          : "#8F8389"};
-    );
+    color: ${(item) =>
+    item.difficulty.toLocaleLowerCase() === "muito fácil"
+      ? "#800080"
+      : item.difficulty.toLocaleLowerCase() === "fácil"
+      ? "#924100"
+      : item.difficulty.toLocaleLowerCase() === "médio"
+      ? "#C03838"
+      : item.difficulty.toLocaleLowerCase() === "difícil"
+      ? "#38C15D"
+      : item.difficulty.toLocaleLowerCase() === "muito difícil"
+      ? "#5baff9"
+      : "#8F8389"};
   }
   @media screen and (min-width: 650px) {
     svg {
@@ -85,3 +78,52 @@ export const CheckinConteiner = styled.i`
     }
   }
 `;
+
+export const NameConteiner = styled.div`
+  width: 100%;
+  display:flex;
+  justify-content: space-between;
+`
+
+export const ProgressConteiner = styled.div`
+  display:flex;
+  width:100%;
+  align-items: center;
+
+  .divDifficulty{
+    width:90%;
+  }
+`
+export const Difficulty = styled.div`
+    background-color:${(item) =>
+      item.difficulty.toLocaleLowerCase() === "muito fácil"
+        ?   "#eac7ea" 
+        : item.difficulty.toLocaleLowerCase() === "fácil"
+        ? "#edcaaf"
+        : item.difficulty.toLocaleLowerCase() === "médio"
+        ? "#efd7d7"
+        : item.difficulty.toLocaleLowerCase() === "difícil"
+        ? "#daf2e0"
+        : item.difficulty.toLocaleLowerCase() === "muito difícil"
+        ? "#bebfd6"
+        : "#e5e5e5"};
+    }
+    color: ${(item) =>
+      item.difficulty.toLocaleLowerCase() === "muito fácil"
+        ? "#800080"
+        : item.difficulty.toLocaleLowerCase() === "fácil"
+        ? "#924100"
+        : item.difficulty.toLocaleLowerCase() === "médio"
+        ? "#C03838"
+        : item.difficulty.toLocaleLowerCase() === "difícil"
+        ? "#38C15D"
+        : item.difficulty.toLocaleLowerCase() === "muito difícil"
+        ? "#5baff9"
+        : "#8F8389"};
+  }
+    max-inline-size: fit-content;
+    padding:0 10px;
+    font-size:14px;
+    border-radius:5px;
+    
+`

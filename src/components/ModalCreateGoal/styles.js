@@ -22,6 +22,13 @@ export const Form = styled.form`
     font-weight: bold;
   }
 
+  div{
+    .select{
+      padding:40px 0 0 0;
+      display:flex;
+      justify-content: space-between;
+    }
+  }
   section {
     display: flex;
     flex-wrap: wrap;

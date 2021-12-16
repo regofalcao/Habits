@@ -66,6 +66,7 @@ const ModalCreateGoal = ({ groupId }) => {
 
         <div>
           <p>Dificuldade:</p>
+          <div  className = "select">
           <ButtonRadio
             register={register}
             text="Fácil"
@@ -84,6 +85,7 @@ const ModalCreateGoal = ({ groupId }) => {
             name="difficulty"
             value="Difícil"
           />
+            </div>
         </div>
 
         <SectionButton>
