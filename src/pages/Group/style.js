@@ -140,6 +140,33 @@ export const SectionTitle = styled.div`
   }
 `;
 
+export const GoalCardDisplay = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  overflow-x: scroll;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #c4c4c4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #11995e;
+    border-radius: 20px;
+    border: 3px solid #11995e;
+  }
+
+  @media screen and (min-width: 900px) {
+    flex-wrap: wrap;
+    overflow-x: unset;
+    justify-content: center;
+  }
+`;
+
 export const GoalsSection = styled.section`
   border: 1px solid var(--black);
   padding: 5px 12px;
