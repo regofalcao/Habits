@@ -16,6 +16,7 @@ import {
   SectionButton,
   TitleCategory,
   InputArea,
+  SectionCloseButton,
 } from "./styles";
 
 import ButtonRadio from "../ButtonRadio";
@@ -55,30 +56,36 @@ const ModalAddGroup = () => {
     resolver: !editGroup && yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
+  const createdGroup = (data) => {
+    reset();
+    createGroup(data);
+  };
+
+  const editedGroup = (data) => {
     reset();
 
-    if (!editGroup) {
-      createGroup(data);
+    // if (!editGroup) {
+    //   createGroup(data);
+    // }
+
+    // if (editGroup) {
+    if (data.name === "") {
+      delete data.name;
+    }
+    if (data.description === "") {
+      delete data.description;
     }
 
-    if (editGroup) {
-      if (data.name === "") {
-        delete data.name;
-      }
-      if (data.description === "") {
-        delete data.description;
-      }
-
-      if (data.category === null) {
-        delete data.category;
-      }
-      editerGroup(data, currentId);
+    if (data.category === null) {
+      delete data.category;
     }
+    editerGroup(data, currentId);
+    // }
   };
 
   const deleteGroup = () => {
     unsubscribeToAgroup(currentId);
+    setModalOpen(false);
   };
 
   const closeGroup = () => {
@@ -97,7 +104,11 @@ const ModalAddGroup = () => {
           }}
         />
       </Header>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form
+        onSubmit={
+          !!editGroup ? handleSubmit(editedGroup) : handleSubmit(createdGroup)
+        }
+      >
         <InputArea>
           <TextField
             sx={{ height: "10px" }}
@@ -150,13 +161,15 @@ const ModalAddGroup = () => {
           <SubmitButtons greenColor type="submit">
             {editGroup ? "Salvar alterações" : "Criar Grupo"}
           </SubmitButtons>
-          <SubmitButtons
-            onClick={() => (editGroup ? deleteGroup() : closeGroup())}
-          >
-            {editGroup ? "Excluir" : "Fechar"}
-          </SubmitButtons>
         </SectionButton>
       </Form>
+      <SectionCloseButton>
+        <SubmitButtons
+          onClick={() => (editGroup ? deleteGroup() : closeGroup())}
+        >
+          {editGroup ? "Excluir" : "Fechar"}
+        </SubmitButtons>
+      </SectionCloseButton>
     </ModalDefault>
   );
 };
