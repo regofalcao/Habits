@@ -1,12 +1,14 @@
-import { Edit } from "@mui/icons-material";
+import { Edit, SettingsOverscanOutlined } from "@mui/icons-material";
 import { Container, Bar, ProgressBar, CheckinConteiner } from "./styles";
 import { useState } from "react";
 import { useGoals } from "../../providers/Goals";
+import { useOpenModal } from "../../providers/OpenModal";
 import api from "../../services/api";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const CardGoal = (item) => {
   const token = useState(JSON.parse(localStorage.getItem("token")) || "");
+  const { setOpenGoalModal, setEditGoal, goalId, setGoalId } = useOpenModal();
   const { updateGoal } = useGoals();
 
   const style = {
@@ -18,7 +20,11 @@ const CardGoal = (item) => {
     },
   };
 
-  const handleButton = () => {};
+  const handleButton = () => {
+    setGoalId(item.goalId);
+    setEditGoal(true);
+    setOpenGoalModal(true);
+  };
 
   const updateHowMuchAchieved = (item) => {
     let howMuch = 0;
