@@ -60,6 +60,8 @@ const ModalAddGroup = ({ groupId }) => {
 
     if (!editGroup) {
       createGroup(data);
+      setModalOpen(false);
+      reset();
     }
 
     if (editGroup) {

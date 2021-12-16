@@ -86,7 +86,8 @@ const Group = () => {
 
   useEffect(() => {
     getGroupInfo();
-  }, [activitiesList]);
+    console.log("atualizado");
+  }, [myGroupsList]);
 
   useEffect(() => {
     creator && creator.id === user.id && setIsOwner(true);
