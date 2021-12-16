@@ -18,7 +18,7 @@ export const Container = styled.main`
   padding: 20px 12px;
   border: 1px solid var(--black);
   opacity: ${(props) => props.openSidebar && "0.9"};
-  min-height: 80vh;
+  max-height: 80vh;
   width: 95%;
   background-color: var(--bege);
   flex-direction: column;

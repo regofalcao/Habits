@@ -7,12 +7,12 @@ import SideBar from "../../components/SideBar";
 import { TextField } from "@mui/material";
 import ModalCreateHabitis from "../../components/ModalCreateHabits";
 import { useUser } from "../../providers/User";
-import  AddButton from "../../components/AddButton"
+import AddButton from "../../components/AddButton";
 
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 const Dashboard = () => {
-  const { setOpenSidebar } = useOpenSideBar();
+  const { setOpenSidebar, openSidebar } = useOpenSideBar();
 
   useEffect(() => {
     setOpenSidebar(false);
@@ -50,10 +50,10 @@ const Dashboard = () => {
       <Header />
       <SideBar />
       <Conteiner>
-        <CardsConteiner>
+        <CardsConteiner openSidebar={openSidebar}>
           <CardHeader>
             <p>Meus Habitos</p>
-            <AddButton onClick = {() => setOpemModal(true)} />
+            <AddButton onClick={() => setOpemModal(true)} />
           </CardHeader>
 
           <TextField

@@ -22,12 +22,8 @@ const CardGroupList = ({ group }) => {
     subscribeToAgroup(group.id);
   };
 
-  const handleCard = () => {
-    history.push(`/group/${group.id}`);
-  };
-
   return (
-    <Container className="CARD" onClick={handleCard}>
+    <Container>
       <IconArea category={category}>
         {category === "esporte" ? (
           <SkateboardingOutlinedIcon />
@@ -50,7 +46,6 @@ const CardGroupList = ({ group }) => {
           <FactCheckIcon
             fontSize="large"
             onClick={(ev) => {
-              ev.stopPropagation();
               handleEdit();
             }}
           />
