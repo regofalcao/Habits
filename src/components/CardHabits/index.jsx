@@ -16,15 +16,10 @@ import IcecreamIcon from "@mui/icons-material/Icecream";
 import HailIcon from "@mui/icons-material/Hail";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import api from "../../services/api";
-import { useState } from "react";
 import { useUser } from "../../providers/User";
-import CloseIcon from "@mui/icons-material/Close";
 import Close from "@mui/icons-material/Close";
 
 const CardHabits = ({ habits, setEditiHabits, setOpemModal }) => {
-  const token = useState(JSON.parse(localStorage.getItem("token")) || "");
-
   habits.sort((a, b) => b.how_much_achieved - a.how_much_achieved);
 
   const { updateHabit, deleteHabit } = useUser();
@@ -49,6 +44,7 @@ const CardHabits = ({ habits, setEditiHabits, setOpemModal }) => {
       };
       updateHabit(data, item.id);
     }
+
     if (item.how_much_achieved + howMuch < 100) {
       const number = Math.round(item.how_much_achieved + howMuch);
       const data = {
@@ -56,40 +52,7 @@ const CardHabits = ({ habits, setEditiHabits, setOpemModal }) => {
       };
       updateHabit(data, item.id);
     }
-
-    if (item.how_much_achieved + howMuch >= 100) {
-      console.log("100%");
-      item.how_much_achieved = 100;
-      api
-        .patch(
-          `/habits/${item.id}`,
-          {
-            achieved: true,
-            how_much_achieved: 100,
-          },
-          {
-            Authorization: `Bearer ${token}`,
-          }
-        )
-        .then((response) => console.log(response));
-    }
-    if (item.how_much_achieved + howMuch < 100) {
-      console.log("ainda não");
-      item.how_much_achieved = item.how_much_achieved + howMuch;
-      api
-        .patch(
-          `/habits/${item.id}`,
-          {
-            how_much_achieved: item.how_much_achieved + howMuch,
-          },
-          {
-            Authorization: `Bearer ${token}`,
-          }
-        )
-        .then((response) => console.log(response));
-    }
   };
-
   const opemEditHabits = (id) => {
     setOpemModal(true);
     setEditiHabits(id);

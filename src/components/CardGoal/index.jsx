@@ -1,16 +1,20 @@
 import { Edit } from "@mui/icons-material";
-import { Container, Bar, ProgressBar, CheckinConteiner, NameConteiner, ProgressConteiner, Difficulty} from "./styles";
-import { useState } from "react";
+import {
+  Container,
+  Bar,
+  ProgressBar,
+  CheckinConteiner,
+  NameConteiner,
+  ProgressConteiner,
+  Difficulty,
+} from "./styles";
 import { useGoals } from "../../providers/Goals";
 import { useOpenModal } from "../../providers/OpenModal";
-import api from "../../services/api";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const CardGoal = (item) => {
-  const token = useState(JSON.parse(localStorage.getItem("token")) || "");
-  const { setOpenGoalModal, setEditGoal, goalId, setGoalId } = useOpenModal();
+  const { setOpenGoalModal, setEditGoal, setGoalId } = useOpenModal();
   const { updateGoal } = useGoals();
-
 
   const style = {
     color: "#4348DE",
@@ -48,49 +52,51 @@ const CardGoal = (item) => {
         how_much_achieved: 100,
       };
 
-      console.log(data);
-
       updateGoal(data, item.goalId, item.group);
     }
     if (item.how_much_achieved + howMuch < 100) {
       const newAchievedValue = item.how_much_achieved + howMuch;
-      console.log(item.how_much_achieved + howMuch);
       const data = {
         achieved: false,
         how_much_achieved: newAchievedValue.toFixed(),
       };
-
-      console.log(data);
 
       updateGoal(data, item.goalId, item.group);
     }
   };
 
   return (
-    <Container>   
-        <NameConteiner>
-          <h3>{item.title.slice(0, 1).toUpperCase().concat(item.title.slice(1))}</h3>
-          <Edit sx={style} onClick={handleButton} />
-        </NameConteiner>
-        <ProgressConteiner>
-          <div  className = "divDifficulty">
-            <Difficulty difficulty = {item.difficulty}>
-            {item.difficulty.slice(0, 1).toUpperCase().concat(item.difficulty.slice(1))}
-            </Difficulty>
-            <Bar>
-              <ProgressBar
-                difficulty={item.difficulty}
-                progress={item.how_much_achieved}>
-                <p>{item.how_much_achieved.toFixed()}%</p>
-              </ProgressBar>
-            </Bar>
-          </div>
-          <CheckinConteiner
-            difficulty={item.difficulty}
-            onClick={() => updateHowMuchAchieved(item)}>
-            <CheckCircleIcon />
-          </CheckinConteiner>
-        </ProgressConteiner>
+    <Container>
+      <NameConteiner>
+        <h3>
+          {item.title.slice(0, 1).toUpperCase().concat(item.title.slice(1))}
+        </h3>
+        <Edit sx={style} onClick={handleButton} />
+      </NameConteiner>
+      <ProgressConteiner>
+        <div className="divDifficulty">
+          <Difficulty difficulty={item.difficulty}>
+            {item.difficulty
+              .slice(0, 1)
+              .toUpperCase()
+              .concat(item.difficulty.slice(1))}
+          </Difficulty>
+          <Bar>
+            <ProgressBar
+              difficulty={item.difficulty}
+              progress={item.how_much_achieved}
+            >
+              <p>{item.how_much_achieved.toFixed()}%</p>
+            </ProgressBar>
+          </Bar>
+        </div>
+        <CheckinConteiner
+          difficulty={item.difficulty}
+          onClick={() => updateHowMuchAchieved(item)}
+        >
+          <CheckCircleIcon />
+        </CheckinConteiner>
+      </ProgressConteiner>
     </Container>
   );
 };

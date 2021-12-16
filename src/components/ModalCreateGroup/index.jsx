@@ -1,14 +1,8 @@
-import ModalDefault from "../ModalDefault";
-
 import { useOpenModal } from "../../providers/OpenModal";
-
 import { TextField } from "@mui/material";
-
 import { useGroups } from "../../providers/Groups";
-
-import { toast } from "react-toastify";
-
-import CloseIcon from "@mui/icons-material/Close";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
   Form,
@@ -21,9 +15,9 @@ import {
 
 import ButtonRadio from "../ButtonRadio";
 import SubmitButtons from "../SubmitButtons";
+import ModalDefault from "../ModalDefault";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const ModalAddGroup = ({ groupId }) => {
@@ -36,16 +30,9 @@ const ModalAddGroup = ({ groupId }) => {
       .nullable(),
   });
 
-  const { modalOpen, handleModal, editGroup, setEditGroup, setModalOpen } =
-    useOpenModal();
+  const { modalOpen, handleModal, editGroup, setModalOpen } = useOpenModal();
 
-  const {
-    currentId,
-    setCurrentId,
-    createGroup,
-    unsubscribeToAgroup,
-    editerGroup,
-  } = useGroups();
+  const { createGroup, unsubscribeToAgroup, editerGroup } = useGroups();
 
   const {
     register,
@@ -64,27 +51,28 @@ const ModalAddGroup = ({ groupId }) => {
   const editedGroup = (data) => {
     reset();
 
-    // if (!editGroup) {
-    //   createGroup(data);
-    // }
-
-    // if (editGroup) {
-    if (data.name === "") {
-      delete data.name;
-    }
-    if (data.description === "") {
-      delete data.description;
+    if (!editGroup) {
+      createGroup(data);
     }
 
-    if (data.category === null) {
-      delete data.category;
+    if (editGroup) {
+      if (data.name === "") {
+        delete data.name;
+      }
+      if (data.description === "") {
+        delete data.description;
+      }
+
+      if (data.category === null) {
+        delete data.category;
+      }
+      editerGroup(data, groupId);
+      setModalOpen(false);
     }
-    editerGroup(data, currentId);
-    // }
   };
 
   const deleteGroup = () => {
-    unsubscribeToAgroup(currentId);
+    unsubscribeToAgroup(groupId);
     setModalOpen(false);
   };
 

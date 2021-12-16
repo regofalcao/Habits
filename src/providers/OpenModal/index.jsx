@@ -14,8 +14,8 @@ export const OpenModalProvider = ({ children }) => {
   const [editActivity, setEditActivity] = useState(false);
   const [openActivityModal, setOpenActivityModal] = useState(false);
   const [openGoalModal, setOpenGoalModal] = useState(false);
-  const [activityId, setActivityId] = useState("");
-  const [goalId, setGoalId] = useState("");
+  const [activityId, setActivityId] = useState(0);
+  const [goalId, setGoalId] = useState(0);
 
   const handleModal = () => {
     setModalOpen(!modalOpen);
