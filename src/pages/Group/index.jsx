@@ -44,7 +44,7 @@ const Group = () => {
 
   const history = useHistory();
   const { myGroupsList, editGroup, unsubscribeToAgroup } = useGroups();
-  const { goalsList, getGoals } = useGoals();
+  const { goalsList, getGroupGoals } = useGoals();
   const { getActivities, activitiesList } = useActivities();
   const { user } = useUser();
   const { isOwner, setIsOwner } = useOpenSideBar();
@@ -69,10 +69,6 @@ const Group = () => {
     modalOpen,
   } = useOpenModal();
 
-  const getGroupInfo = () => {
-    setGroupInfo(myGroupsList.find((group) => group.id === groupId));
-  };
-
   const exitDeleteButtonHandler = () => {
     unsubscribeToAgroup(groupId);
     setIsOwner(false);
@@ -89,15 +85,16 @@ const Group = () => {
   }, []);
 
   useEffect(() => {
-    getGoals(groupId);
+    getGroupGoals(groupId);
   }, []);
 
   useEffect(() => {
-    getGroupInfo();
-  }, [myGroupsList]);
+    setGroupInfo(myGroupsList.find((group) => group.id === groupId));
+  }, [myGroupsList, goalsList]);
+  // console.log(groupInfo);
 
   useEffect(() => {
-    creator && creator.id === user.id && setIsOwner(true);
+    creator && creator.id === user.id ? setIsOwner(true) : setIsOwner(false);
   }, [groupInfo]);
 
   const handleModalButton = (type) => {
@@ -135,7 +132,7 @@ const Group = () => {
             </ButtonExcludeExit>
           )}
         </TopContainer>
-        <h2>{name !== undefined ? name : "Nome do grupo"}</h2>
+        <h2>{name && name}</h2>
         <SectionContainer>
           <LeftSideContainer>
             <ActivitiesSection>
@@ -162,15 +159,18 @@ const Group = () => {
                 <AddButton onClick={() => handleModalButton("goal")} />
               </SectionTitle>
               <GoalCardDisplay>
-                {goalsList.map((goal) => (
-                  <CardGoal
-                    group={goal.group}
-                    title={goal.title}
-                    difficulty={goal.difficulty}
-                    how_much_achieved={goal.how_much_achieved}
-                    achieved={goal.achieved}
-                  />
-                ))}
+                {goalsList &&
+                  goalsList.map((goal) => (
+                    <CardGoal
+                      key={goal.id}
+                      goalId={goal.id}
+                      group={goal.group}
+                      title={goal.title}
+                      difficulty={goal.difficulty}
+                      how_much_achieved={goal.how_much_achieved}
+                      achieved={goal.achieved}
+                    />
+                  ))}
               </GoalCardDisplay>
             </GoalsSection>
           </LeftSideContainer>

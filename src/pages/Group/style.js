@@ -171,7 +171,7 @@ export const GoalsSection = styled.section`
   border: 1px solid var(--black);
   padding: 5px 12px;
   height: 35vh;
-  overflow-x: scroll;
+  overflow-y: scroll;
   margin-bottom: 1rem;
   ::-webkit-scrollbar {
     width: 4px;
