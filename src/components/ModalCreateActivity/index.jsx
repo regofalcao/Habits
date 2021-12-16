@@ -21,8 +21,13 @@ const ModalCreateActivity = ({ groupId }) => {
     title: yup.string().required("Nome da atividade obrigatório"),
   });
 
-  const { openActivityModal, handleActivityModal, editActivity, activityId } =
-    useOpenModal();
+  const {
+    openActivityModal,
+    setOpenActivityModal,
+    handleActivityModal,
+    editActivity,
+    activityId,
+  } = useOpenModal();
 
   const {
     control,
@@ -83,7 +88,14 @@ const ModalCreateActivity = ({ groupId }) => {
           <SubmitButtons greenColor type="submit">
             {editActivity ? "Salvar alterações" : "Criar atividade"}
           </SubmitButtons>
-          <SubmitButtons>Fechar</SubmitButtons>
+          <SubmitButtons
+            onClick={() => {
+              setOpenActivityModal(false);
+              reset();
+            }}
+          >
+            Fechar
+          </SubmitButtons>
         </SectionButton>
       </Form>
     </ModalDefault>

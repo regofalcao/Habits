@@ -4,9 +4,18 @@ import SideBar from "../../components/SideBar";
 import { Container, Content, Background } from "../MyGroups/styles";
 import ModalAddGroup from "../../components/ModalCreateGroup";
 import { useOpenModal } from "../../providers/OpenModal";
+import { useEffect } from "react";
+
+import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 const GroupList = () => {
   const { modalOpen } = useOpenModal();
+
+  const { setOpenSidebar } = useOpenSideBar();
+
+  useEffect(() => {
+    setOpenSidebar(false);
+  }, []);
   return (
     <>
       <Header />
