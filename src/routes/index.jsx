@@ -15,10 +15,10 @@ const Routes = () => {
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/groupsList" component={GroupsList} />
-      <Route path="/myGroups" component={MyGroups} />
-      <Route path="/group/:id" component={Group} />
+      <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/groupsList" component={GroupsList} isPrivate />
+      <Route path="/myGroups" component={MyGroups} isPrivate />
+      <Route path="/group/:id" component={Group} isPrivate />
     </Switch>
   );
 };

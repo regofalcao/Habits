@@ -1,7 +1,10 @@
 import { Redirect, Route as ReactDomRoute } from "react-router-dom";
 
 const Route = ({ isPrivated = false, component: Component, ...rest }) => {
-  // const token = ...
+  const token = localStorage.getItem("@kenzieHabits:token");
+  console.log("token: ", !!token);
+  console.log("Privado:", !!isPrivated);
+  console.log("============================");
 
   // true e true => ok
   // true e false => login
@@ -11,10 +14,10 @@ const Route = ({ isPrivated = false, component: Component, ...rest }) => {
     <ReactDomRoute
       {...rest}
       render={() => {
-        return isPrivated === !!token ? (
+        return isPrivated && !!token ? (
           <Component />
         ) : (
-          <Redirect to={isPrivated ? "/login" : "/"} />
+          <Redirect to={isPrivated ? "/login" : "/dashboard"} />
         );
       }}
     />

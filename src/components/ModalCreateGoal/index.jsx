@@ -23,8 +23,14 @@ const ModalCreateGoal = ({ groupId }) => {
       .nullable(),
   });
 
-  const { openGoalModal, setOpenGoalModal, handleGoalModal, editGoal, goalId } =
-    useOpenModal();
+  const {
+    openGoalModal,
+    setOpenGoalModal,
+    handleGoalModal,
+    editGoal,
+    setEditGoal,
+    goalId,
+  } = useOpenModal();
 
   const {
     register,
@@ -38,6 +44,7 @@ const ModalCreateGoal = ({ groupId }) => {
   const onSubmit = (data) => {
     if (editGoal) {
       updateGoal(data, goalId, groupId);
+      setEditGoal(false);
     } else {
       createGoal(data, groupId);
     }
@@ -74,26 +81,26 @@ const ModalCreateGoal = ({ groupId }) => {
 
         <div>
           <p>Dificuldade:</p>
-          <div  className = "select">
-          <ButtonRadio
-            register={register}
-            text="Fácil"
-            name="difficulty"
-            value="Fácil"
-          />
-          <ButtonRadio
-            register={register}
-            text="Médio"
-            name="difficulty"
-            value="Médio"
-          />
-          <ButtonRadio
-            register={register}
-            text="Difícil"
-            name="difficulty"
-            value="Difícil"
-          />
-            </div>
+          <div className="select">
+            <ButtonRadio
+              register={register}
+              text="Fácil"
+              name="difficulty"
+              value="Fácil"
+            />
+            <ButtonRadio
+              register={register}
+              text="Médio"
+              name="difficulty"
+              value="Médio"
+            />
+            <ButtonRadio
+              register={register}
+              text="Difícil"
+              name="difficulty"
+              value="Difícil"
+            />
+          </div>
         </div>
 
         <SectionButton>
