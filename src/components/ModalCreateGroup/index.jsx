@@ -26,7 +26,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const ModalAddGroup = () => {
+const ModalAddGroup = ({ groupId }) => {
   const schema = yup.object().shape({
     name: yup.string().required("Nome do grupo obrigatório"),
     description: yup.string().required("Descrição do grupo obrigatória"),

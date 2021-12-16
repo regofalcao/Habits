@@ -13,6 +13,7 @@ export const CardConteiner = styled.div`
 
 export const IconConteiner = styled.div`
     width: 25%;
+    max-width:80px;
     background-color:${(props) =>   props.category.toLocaleLowerCase() === "saúde" ?
                                         "#800080" : 
                                     props.category.toLocaleLowerCase() === "esporte" ?
@@ -30,7 +31,10 @@ export const IconConteiner = styled.div`
         color:#FFF;
         font-size:35px
     }
-    @media screen and (min-width: 650px){
+    :hover{
+        opacity:0.8;
+    }
+    @media screen and (min-width: 900px){
         height:80px;
         width:18%
     }
@@ -39,11 +43,13 @@ export const IconConteiner = styled.div`
 
 export const BodyConteiner = styled.div`
     height: 100%;
+    width:70%;
 `
 
 export const ConteinerDiscription = styled.div`
     display:flex;
-
+    width:100%;
+    justify-content:space-between;
     div{
         margin:0 5px;
         text-align:start;
@@ -54,9 +60,7 @@ export const Name = styled.div`
     text-overflow:ellipsis;
     white-space:nowrap;
     overflow: hidden;
-    @media screen and (min-width: 650px){
-        width:350px
-    }
+    
     `
 export const Category = styled.div`
     background-color:${(props) =>   props.category.toLocaleLowerCase() === "saúde" ?
@@ -79,7 +83,9 @@ export const Category = styled.div`
     padding:0 10px;
     font-size:14px;
     border-radius:5px;
-    
+    :hover{
+        opacity:0.8;
+    }
 `
 
 export const Bar = styled.div`
@@ -108,7 +114,9 @@ export const ProgressBar = styled.div`
     p{
         text-align:center;
     }
-
+    :hover{
+        opacity:0.8;
+    }
 `
 
 export const CheckinConteiner = styled.i`
@@ -124,7 +132,10 @@ export const CheckinConteiner = styled.i`
                                     props.category.toLocaleLowerCase() === "trabalho" ?
                                         "#4348DE" : "#8F8389" };
     }
-    @media screen and (min-width: 650px){
+    :hover{
+        opacity:0.8;
+    }
+    @media screen and (min-width: 900px){
         svg{
             font-size:50px
         }

@@ -19,15 +19,15 @@ export const GoalsProvider = ({ children }) => {
 
   const getGoals = (groupId) => {
     api
-      .get(`/groups/${groupId}`, {
+      .get(`/groups/:${groupId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const groupGoals = response.data;
+        const { results } = response.data;
 
-        setGoalsList(groupGoals);
+        setGoalsList(results);
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };

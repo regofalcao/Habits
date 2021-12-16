@@ -25,16 +25,17 @@ export const ActivitiesProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        const groupActivities = response.data;
+        const { results } = response.data;
 
-        setActivitiesList(groupActivities);
+        setActivitiesList(results);
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };
 
   const createActivity = (data, groupId) => {
+    const newData = { ...data, group: groupId };
     api
-      .post("/activities/", data, {
+      .post("/activities/", newData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -49,7 +50,7 @@ export const ActivitiesProvider = ({ children }) => {
 
   const updateActivity = (data, activityId, groupId) => {
     api
-      .patch(`/activities/:${activityId}/`, data, {
+      .patch(`/activities/${activityId}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -68,13 +69,16 @@ export const ActivitiesProvider = ({ children }) => {
       });
   };
 
-  const deleteActivity = (activityId) => {
+  const deleteActivity = (activityId, groupId) => {
     api
-      .delete(`/activities/${activityId}/`)
+      .delete(`/activities/${activityId}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
-        setActivitiesList(
-          activitiesList.map((activitie) => activitie.id !== activityId)
-        );
+        getActivities(groupId);
+        toast.success("Atividade deletada");
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };

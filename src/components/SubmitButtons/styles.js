@@ -13,6 +13,7 @@ export const Container = styled.button`
   width: 100%;
   color: white;
   cursor: pointer;
+  margin: 0 0 7px 0;
 
   &:hover {
     border: 2px solid black;

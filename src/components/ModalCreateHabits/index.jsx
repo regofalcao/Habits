@@ -99,9 +99,9 @@ const ModalCreateHabitis = ({setOpemModal, setEditiHabits, editHabits}) => {
 
                 <Section>
                     <TitleSection>
-                        <p>Categoria:</p>
+                        Categoria:
                     </TitleSection>
-                    <div>                        
+                    <div className = "divButtonRadio" >                        
                         <ButtonRadio    register = {register}
                                         text = "Saúde"
                                         name = "category"
@@ -123,9 +123,9 @@ const ModalCreateHabitis = ({setOpemModal, setEditiHabits, editHabits}) => {
 
                 <Section>
                     <TitleSection>
-                        <p>Dificuldade:</p>
+                        Dificuldade:
                     </TitleSection>
-                    <div>
+                    <div className = "divButtonRadio" >
                         <ButtonRadio    register = {register}
                                         text = "Fácil"
                                         name = "difficulty"
@@ -142,7 +142,7 @@ const ModalCreateHabitis = ({setOpemModal, setEditiHabits, editHabits}) => {
                 </Section>
                 <Section>
                     <TitleSection>Frequência:</TitleSection>
-                    <div>   
+                    <div className = "divButtonRadio" >   
                         <ButtonRadio    register = {register}
                                         text = "Diaria"
                                         name = "frequency"

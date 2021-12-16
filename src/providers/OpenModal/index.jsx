@@ -23,12 +23,12 @@ export const OpenModalProvider = ({ children }) => {
 
   const handleActivityModal = () => {
     setOpenActivityModal(!openActivityModal);
-    setEditActivity(!editActivity);
+    setEditActivity(false);
   };
 
   const handleGoalModal = () => {
     setOpenGoalModal(!openGoalModal);
-    setEditGoal(!editGoal);
+    setEditGoal(false);
   };
 
   return (

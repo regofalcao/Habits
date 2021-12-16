@@ -6,19 +6,20 @@ import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import VerifiedIcon from "@mui/icons-material/Verified";
 
+import { useUser } from "../../providers/User";
+
 import { Link } from "react-router-dom";
 
 import UserImage from "../../assets/user.svg";
 
-import { useOpenModal } from "../../providers/OpenModal";
-
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 
-const SideBar = () => {
-  const { openSidebar, isOwner } = useOpenSideBar();
+const SideBar = ({ modalOpen }) => {
+  const { setOpenSidebar, openSidebar, isOwner } = useOpenSideBar();
 
-  const { modalOpen } = useOpenModal();
   const user = JSON.parse(localStorage.getItem("@kenzieHabits:user"));
+
+  const { logout } = useUser();
 
   return (
     <>
@@ -44,7 +45,9 @@ const SideBar = () => {
             </li>
             <li>
               <LogoutIcon />
-              <Link to="/login">Logout</Link>
+              <Link onClick={logout} to="/login">
+                Logout
+              </Link>
             </li>
           </ul>
         </Container>
@@ -68,7 +71,7 @@ const SideBar = () => {
             <SearchIcon />
             <Link to="/groupsList">Procurar Grupos</Link>
           </li>
-          <li>
+          <li onClick={logout}>
             <LogoutIcon />
             <Link to="/login">Logout</Link>
           </li>
