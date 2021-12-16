@@ -27,7 +27,7 @@ export const CardsConteiner = styled.div`
         border: 3px solid #11995E;  
     }
 
-    @media screen and (min-width: 650px){
+    @media screen and (min-width: 900px){
         width:60%;
         max-height:580px;
         margin: 50px 0 0 208px;

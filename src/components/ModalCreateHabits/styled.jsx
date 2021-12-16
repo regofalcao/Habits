@@ -19,7 +19,13 @@ export const ModalConteiner = styled.div`
     background-color:#FFF;
     border-radius: 10px;
     padding: 10px;
-
+  
+    form{
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        height:100%;
+    }
 
     @media screen and (min-width: 650px){
         width:600px;
@@ -35,7 +41,7 @@ export const Section = styled.section`
 
     margin: 10px 0 10px 0;
   
-    div{
+    .divButtonRadio{
         
         display:flex;
         flex-wrap: wrap;
@@ -72,13 +78,11 @@ export const Header = styled.div`
 `
 
 export const ButtonConteiner = styled.div`
-    margin: 10px 0;
-    height: 100px;
     justify-content:space-between;
     display:flex;
     flex-direction:column;
 `
 
-export const TitleSection = styled.div`
-
+export const TitleSection = styled.div`  
+        text-align:start;   
 `

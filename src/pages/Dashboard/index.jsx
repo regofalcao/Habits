@@ -7,6 +7,7 @@ import SideBar from "../../components/SideBar";
 import { TextField } from "@mui/material";
 import ModalCreateHabitis from "../../components/ModalCreateHabits";
 import { useUser } from "../../providers/User";
+import  AddButton from "../../components/AddButton"
 
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 
@@ -52,7 +53,7 @@ const Dashboard = () => {
         <CardsConteiner>
           <CardHeader>
             <p>Meus Habitos</p>
-            <div onClick={() => setOpemModal(true)}>+</div>
+            <AddButton onClick = {() => setOpemModal(true)} />
           </CardHeader>
 
           <TextField
