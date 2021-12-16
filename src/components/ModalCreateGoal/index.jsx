@@ -1,22 +1,19 @@
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useOpenModal } from "../../providers/OpenModal";
 import { TextField } from "@mui/material";
-import { toast } from "react-toastify";
 import { Form, Header, SectionButton } from "./styles";
 import { useGoals } from "../../providers/Goals";
 
 import CloseIcon from "@mui/icons-material/Close";
 import ButtonRadio from "../ButtonRadio";
 import SubmitButtons from "../SubmitButtons";
-import DateTimePicker from "@mui/lab/DateTimePicker";
 import ModalDefault from "../ModalDefault";
 
 import * as yup from "yup";
 
 const ModalCreateGoal = ({ groupId }) => {
-  const { createGoal, updateGoal } = useGoals();
+  const { createGoal, updateGoal, deleteGoal } = useGoals();
 
   const schema = yup.object().shape({
     title: yup.string().required("Nome da atividade obrigatório"),
@@ -39,9 +36,20 @@ const ModalCreateGoal = ({ groupId }) => {
   });
 
   const onSubmit = (data) => {
-    editGoal ? updateGoal(data, goalId, groupId) : createGoal(data, groupId);
+    if (editGoal) {
+      updateGoal(data, goalId, groupId);
+    } else {
+      createGoal(data, groupId);
+    }
 
+    setOpenGoalModal(false);
     reset();
+  };
+
+  const handleDeleteButton = () => {
+    deleteGoal(goalId, groupId);
+
+    setOpenGoalModal(false);
   };
 
   return (
@@ -92,7 +100,7 @@ const ModalCreateGoal = ({ groupId }) => {
           <SubmitButtons greenColor type="submit">
             {editGoal ? "Salvar alterações" : "Criar meta"}
           </SubmitButtons>
-          <SubmitButtons onClick={() => setOpenGoalModal(false)}>
+          <SubmitButtons onClick={handleDeleteButton}>
             {editGoal ? "Excluir" : "Fechar"}
           </SubmitButtons>
         </SectionButton>
