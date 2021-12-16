@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import Logo from "../../components/Logo";
-import { Entrar, Cadastro, Div, Text, Image } from "./styles";
+import { Entrar, Cadastro, Div, Text, Image, Container } from "./styles";
 import home from "../../assets/home.svg";
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
       <Logo />
 
       <Div>
-        <Image src={home} width={600} height={600} alt="home-image"></Image>
+        <Image src={home} width={600} height={500} alt="home-image"></Image>
         <Text>
           {" "}
           Um lugar para manter seus habitos em dia,<br></br> além de conhecer

@@ -105,7 +105,7 @@ export const CategoryCard = styled.section`
       ? "#C03636"
       : props.category === "leitura"
       ? "#8F8389"
-      : props.category === "saude"
+      : props.category === "saúde"
       ? "#38C15D"
       : props.category === "esporte"
       ? "#4348DE"
