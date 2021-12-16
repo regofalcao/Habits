@@ -89,7 +89,10 @@ const Group = () => {
   }, []);
 
   useEffect(() => {
+    console.log(groupId);
+    console.log(goalsList);
     getGoals(groupId);
+    console.log(goalsList);
   }, []);
 
   useEffect(() => {

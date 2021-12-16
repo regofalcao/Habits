@@ -19,7 +19,7 @@ export const GoalsProvider = ({ children }) => {
 
   const getGoals = (groupId) => {
     api
-      .get(`/groups/:${groupId}`, {
+      .get(`/goals/?group=${groupId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
