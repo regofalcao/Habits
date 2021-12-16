@@ -94,7 +94,7 @@ const Group = () => {
   // console.log(groupInfo);
 
   useEffect(() => {
-    creator && creator.id === user.id && setIsOwner(true);
+    creator && creator.id === user.id ? setIsOwner(true) : setIsOwner(false);
   }, [groupInfo]);
 
   const handleModalButton = (type) => {
