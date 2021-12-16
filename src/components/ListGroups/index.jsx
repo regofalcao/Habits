@@ -10,7 +10,6 @@ import CardGroupList from "../CardGroupsList";
 
 const ListGroupsCard = () => {
   const { setModalOpen, setEditGroup } = useOpenModal();
-  const token = useState(JSON.parse(localStorage.getItem("token")) || "");
 
   const {
     groupsList,
@@ -24,22 +23,12 @@ const ListGroupsCard = () => {
     goToPreviousPage,
   } = useGroups();
 
-  console.log(pageNumber);
   const handleNext = () => {
     goToNextPage(pageNumber);
-<<<<<<< HEAD
-=======
-    getGroupsList(pageNumber);
->>>>>>> bugfix/goals-request-group-page
   };
 
   const handlePrevious = () => {
     goToPreviousPage(pageNumber);
-<<<<<<< HEAD
-    console.log(pageNumber);
-=======
-    getGroupsList(pageNumber);
->>>>>>> bugfix/goals-request-group-page
   };
 
   const { openSidebar } = useOpenSideBar();
