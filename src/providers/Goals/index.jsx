@@ -19,17 +19,37 @@ export const GoalsProvider = ({ children }) => {
 
   const getGoals = (groupId) => {
     api
-      .get(`/goals/?group=${groupId}`, {
+      .get("/groups/subscriptions/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const { results } = response.data;
-
-        setGoalsList(results);
+        console.log(groupId);
+        console.log("lista", response.data);
+        const searchedGroup = response.data.forEach((group) =>
+          console.log(group)
+        );
+        const { goals } = searchedGroup;
+        console.log("goals do grupo", goals);
+        setGoalsList(goals);
       })
-      .catch((err) => toast.error("Ocorreu um erro na solicitação"));
+      .catch((err) => {
+        toast.error("Erro! Não foi possível atualizar sua lista de grupos");
+      });
+    // api
+    // .get(`/groups/${groupId}`, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    // .then((response) => {
+    //   const { results } = response.data;
+    //   console.log(results);
+
+    //   setGoalsList(results);
+    // })
+    // .catch((err) => toast.error("Ocorreu um erro na solicitação"));
   };
 
   const createGoal = (data, groupId) => {

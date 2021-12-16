@@ -57,8 +57,7 @@ const Group = () => {
   const { id } = useParams();
   const groupId = parseInt(id);
 
-  const { name, creator, users_on_group } = groupInfo;
-  console.log(groupInfo);
+  const { name, creator, users_on_group, goals } = groupInfo;
 
   const {
     handleModal,
@@ -69,10 +68,6 @@ const Group = () => {
     setOpenGoalModal,
     modalOpen,
   } = useOpenModal();
-
-  // const getGroupInfo = () => {
-  //   setGroupInfo(myGroupsList.find((group) => group.id === groupId));
-  // };
 
   const exitDeleteButtonHandler = () => {
     unsubscribeToAgroup(groupId);
@@ -95,7 +90,8 @@ const Group = () => {
 
   useEffect(() => {
     setGroupInfo(myGroupsList.find((group) => group.id === groupId));
-  }, [myGroupsList]);
+  }, [myGroupsList, goalsList]);
+  // console.log(groupInfo);
 
   useEffect(() => {
     creator && creator.id === user.id && setIsOwner(true);
@@ -163,8 +159,8 @@ const Group = () => {
                 <AddButton onClick={() => handleModalButton("goal")} />
               </SectionTitle>
               <GoalCardDisplay>
-                {goalsList &&
-                  goalsList.map((goal) => (
+                {goals &&
+                  goals.map((goal) => (
                     <CardGoal
                       goalId={goal.id}
                       group={goal.group}
