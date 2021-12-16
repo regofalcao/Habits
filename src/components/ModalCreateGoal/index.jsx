@@ -26,7 +26,8 @@ const ModalCreateGoal = ({ groupId }) => {
       .nullable(),
   });
 
-  const { openGoalModal, handleGoalModal, editGoal, goalId } = useOpenModal();
+  const { openGoalModal, setOpenGoalModal, handleGoalModal, editGoal, goalId } =
+    useOpenModal();
 
   const {
     register,
@@ -89,7 +90,9 @@ const ModalCreateGoal = ({ groupId }) => {
           <SubmitButtons greenColor type="submit">
             {editGoal ? "Salvar alterações" : "Criar meta"}
           </SubmitButtons>
-          <SubmitButtons>{editGoal ? "Excluir" : "Fechar"}</SubmitButtons>
+          <SubmitButtons onClick={() => setOpenGoalModal(false)}>
+            {editGoal ? "Excluir" : "Fechar"}
+          </SubmitButtons>
         </SectionButton>
       </Form>
     </ModalDefault>

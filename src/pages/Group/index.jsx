@@ -35,6 +35,12 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // import CardGoal from "../../components/CardGoal";
 
 const Group = () => {
+  const { setOpenSidebar } = useOpenSideBar();
+
+  useEffect(() => {
+    setOpenSidebar(false);
+  }, []);
+
   const history = useHistory();
   const { myGroupsList, editGroup, unsubscribeToAgroup } = useGroups();
   const { goalsList, getGoals } = useGoals();
@@ -59,6 +65,7 @@ const Group = () => {
     setOpenActivityModal,
     openGoalModal,
     setOpenGoalModal,
+    modalOpen,
   } = useOpenModal();
 
   const getGroupInfo = () => {
@@ -104,7 +111,9 @@ const Group = () => {
   return (
     <>
       <Header />
-      <SideBar />
+      <SideBar
+        modalOpen={!!openActivityModal || !!openGoalModal || !!modalOpen}
+      />
       <ModalCreateActivity isOpen={openActivityModal} groupId={groupId} />
       <ModalCreateGoal isOpen={openGoalModal} groupId={groupId} />
       <ModalCreateGroup isOpen={handleModal} groupId={groupId} />

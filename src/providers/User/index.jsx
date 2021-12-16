@@ -57,6 +57,9 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("@kenzieHabits:token");
     localStorage.removeItem("@kenzieHabits:user");
+    localStorage.removeItem("@kenzieHabits:groups");
+    localStorage.removeItem("@kenzieHabits:habit");
+
     setToken("");
   };
 
@@ -107,7 +110,7 @@ export const UserProvider = ({ children }) => {
 
   const updateHabit = (data, habitId) => {
     api
-      .patch(`/habits/${habitId}/`, data,{
+      .patch(`/habits/${habitId}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -123,7 +126,7 @@ export const UserProvider = ({ children }) => {
 
   const deleteHabit = (habitId) => {
     api
-      .delete(`/habits/${habitId}/`,{
+      .delete(`/habits/${habitId}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
