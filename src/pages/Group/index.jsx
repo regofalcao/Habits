@@ -14,6 +14,7 @@ import {
   LeftSideContainer,
   MembersCardDisplay,
   MetasDisplay,
+  GoalCardDisplay,
 } from "./style";
 
 import Header from "../../components/Header";
@@ -29,7 +30,7 @@ import { useUser } from "../../providers/User";
 import { useOpenSideBar } from "../../providers/OpenSideBar";
 import { useOpenModal } from "../../providers/OpenModal";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import CardMetas from "../../components/CardMetas";
+import CardMetas from "../../components/CardGoal";
 
 const Group = () => {
   const history = useHistory();
@@ -268,8 +269,10 @@ const Group = () => {
             <GoalsSection>
               <SectionTitle>
                 <h2>Metas</h2>
-                <MetasDisplay>
-                  {/* {goals.map((goal) => (
+                <AddButton onClick={() => handleModalButton("goal")} />
+              </SectionTitle>
+              <GoalCardDisplay>
+                  {goals.map((goal) => (
                     <CardMetas
                       group={goal.group}
                       title={goal.title}
@@ -277,10 +280,8 @@ const Group = () => {
                       how_much_achieved={goal.how_much_achieved}
                       achieved={goal.achieved}
                     />
-                  ))} */}
-                </MetasDisplay>
-                <AddButton onClick={() => handleModalButton("goal")} />
-              </SectionTitle>
+                  ))}
+                </GoalCardDisplay>
             </GoalsSection>
           </LeftSideContainer>
           <MembersSection>
