@@ -1,6 +1,8 @@
-import { Edit } from "@mui/icons-material";
+import { Edit, Delete } from "@mui/icons-material";
 import { Container } from "./styles";
 import { useOpenModal } from "../../providers/OpenModal";
+import { useActivities } from "../../providers/Activities";
+import { useOpenSideBar } from "../../providers/OpenSideBar";
 
 const CardActivity = (props) => {
   const style = {
@@ -12,6 +14,10 @@ const CardActivity = (props) => {
     },
   };
 
+  const { deleteActivity } = useActivities();
+
+  const { isOwner } = useOpenSideBar();
+
   const { setOpenActivityModal, setEditActivity, setActivityId } =
     useOpenModal();
 
@@ -19,6 +25,12 @@ const CardActivity = (props) => {
     setOpenActivityModal(true);
     setEditActivity(true);
     setActivityId(activityId);
+  };
+
+  const handleDeleteIcon = (activityId, groupId) => {
+    deleteActivity(activityId, groupId);
+    setOpenActivityModal(false);
+    setEditActivity(false);
   };
 
   const formateTheDate = () => {
@@ -36,9 +48,15 @@ const CardActivity = (props) => {
     <Container>
       <div>
         <h3>{props.title}</h3>
+        {isOwner && (
+          <Delete
+            sx={style}
+            onClick={() => handleDeleteIcon(props.id, props.group)}
+          />
+        )}
         <Edit sx={style} onClick={() => handleButton(props.id)} />
       </div>
-      <span>{formateTheDate()}</span>
+      <span>{props.realization_time && formateTheDate()}</span>
     </Container>
   );
 };
