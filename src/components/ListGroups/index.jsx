@@ -17,20 +17,20 @@ const ListGroupsCard = () => {
     searchGroups,
     searchList,
     getGroupsList,
+    nextPage,
+    previousPage,
     pageNumber,
     goToNextPage,
     goToPreviousPage,
   } = useGroups();
 
+  console.log(pageNumber);
   const handleNext = () => {
     goToNextPage(pageNumber);
-    getGroupsList(pageNumber);
-    console.log(pageNumber);
   };
 
   const handlePrevious = () => {
     goToPreviousPage(pageNumber);
-    getGroupsList(pageNumber);
     console.log(pageNumber);
   };
 
@@ -40,7 +40,7 @@ const ListGroupsCard = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   useEffect(() => {
     getGroupsList(pageNumber);
-  }, []);
+  }, [pageNumber]);
 
   const filterGroups = () => {
     if (text !== "") {

@@ -18,8 +18,8 @@ export const GroupsProvider = ({ children }) => {
   const [groupsList, setGroupsList] = useState([]);
   const [myGroupsList, setMyGroupsList] = useState([]);
   const [searchList, setSearchList] = useState([]);
-  const [nextPage] = useState(1);
-  const [previousPage] = useState("");
+  const [nextPage, setNextPage] = useState("");
+  const [previousPage, setPreviousPage] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [currentId, setCurrentId] = useState(0);
 
@@ -93,8 +93,9 @@ export const GroupsProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        const { results } = response.data;
-
+        const { results, next, previous } = response.data;
+        setNextPage(next);
+        setPreviousPage(previous);
         setGroupsList(results);
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));
@@ -193,6 +194,8 @@ export const GroupsProvider = ({ children }) => {
         searchList,
         pageNumber,
         currentId,
+        nextPage,
+        previousPage,
         setCurrentId,
         getMyGroups,
         goToNextPage,
