@@ -83,7 +83,7 @@ export const GoalsProvider = ({ children }) => {
       });
   };
 
-  const deleteGoal = (goalId) => {
+  const deleteGoal = (goalId, groupId) => {
     api
       .delete(`/goals/${goalId}/`, {
         headers: {
@@ -91,7 +91,7 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        setGoalsList(goalsList.map((goal) => goal.id !== goalId));
+        getGroupGoals(groupId);
         toast.success("Meta deletada");
       })
       .catch((err) => toast.error("Ocorreu um erro na solicitação"));

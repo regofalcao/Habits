@@ -13,7 +13,7 @@ import ModalDefault from "../ModalDefault";
 import * as yup from "yup";
 
 const ModalCreateGoal = ({ groupId }) => {
-  const { createGoal, updateGoal } = useGoals();
+  const { createGoal, updateGoal, deleteGoal } = useGoals();
 
   const schema = yup.object().shape({
     title: yup.string().required("Nome da atividade obrigatório"),
@@ -44,6 +44,12 @@ const ModalCreateGoal = ({ groupId }) => {
 
     setOpenGoalModal(false);
     reset();
+  };
+
+  const handleDeleteButton = () => {
+    deleteGoal(goalId, groupId);
+
+    setOpenGoalModal(false);
   };
 
   return (
@@ -92,7 +98,7 @@ const ModalCreateGoal = ({ groupId }) => {
           <SubmitButtons greenColor type="submit">
             {editGoal ? "Salvar alterações" : "Criar meta"}
           </SubmitButtons>
-          <SubmitButtons onClick={() => setOpenGoalModal(false)}>
+          <SubmitButtons onClick={handleDeleteButton}>
             {editGoal ? "Excluir" : "Fechar"}
           </SubmitButtons>
         </SectionButton>
