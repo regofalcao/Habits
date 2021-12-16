@@ -39,7 +39,7 @@ const CardGroup = ({ group }) => {
           <SkateboardingOutlinedIcon />
         ) : category === "leitura" ? (
           <MenuBookOutlinedIcon />
-        ) : category === "saude" ? (
+        ) : category === "saúde" ? (
           <MonitorHeartOutlinedIcon />
         ) : category === "trabalho" ? (
           <WorkIcon />

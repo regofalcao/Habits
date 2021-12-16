@@ -141,7 +141,7 @@ const ModalAddGroup = ({ groupId }) => {
             register={register}
             text="Saúde"
             name="category"
-            value="saude"
+            value="saúde"
           />
           <ButtonRadio
             register={register}

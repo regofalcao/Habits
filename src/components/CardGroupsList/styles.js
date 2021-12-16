@@ -33,10 +33,9 @@ export const IconArea = styled.div`
   max-height: 65px;
   border-radius: 5px;
   width: 100px;
-  cursor: pointer;
 
   svg {
-    cursor: pointer;
+    /* cursor: pointer; */
     color: var(--bege);
   }
 
@@ -61,7 +60,6 @@ export const DescriptionArea = styled.section`
     height: 30px;
 
     h2 {
-      cursor: pointer;
       line-height: 28px;
       text-align: left;
       width: 65%;
