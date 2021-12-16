@@ -44,7 +44,7 @@ const CardGoal = (item) => {
         how_much_achieved: 100,
       };
 
-      updateGoal(data, item.goalId, item.group);
+      updateGoal(data, item.goalId, item.group, item.how_much_achieved);
       // api
       //   .patch(
       //     `/group/${item.group}/`,
@@ -65,8 +65,7 @@ const CardGoal = (item) => {
         achieved: true,
         how_much_achieved: item.how_much_achieved + howMuch,
       };
-
-      updateGoal(data, item.goalId, item.group);
+      updateGoal(data, item.goalId, item.group, item.how_much_achieved);
       // api
       //   .patch(
       //     `/group/${item.group}/`,
