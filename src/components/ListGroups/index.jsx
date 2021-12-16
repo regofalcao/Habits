@@ -25,13 +25,11 @@ const ListGroupsCard = () => {
   const handleNext = () => {
     goToNextPage(pageNumber);
     getGroupsList(pageNumber);
-    console.log(pageNumber);
   };
 
   const handlePrevious = () => {
     goToPreviousPage(pageNumber);
     getGroupsList(pageNumber);
-    console.log(pageNumber);
   };
 
   const { openSidebar } = useOpenSideBar();
@@ -50,9 +48,6 @@ const ListGroupsCard = () => {
       setIsFiltered(false);
     }
   };
-
-  console.log(groupsList);
-  console.log(searchList);
 
   return (
     <Container openSidebar={openSidebar}>
