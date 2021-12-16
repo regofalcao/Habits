@@ -38,10 +38,11 @@ const ModalCreateGoal = ({ groupId }) => {
   const onSubmit = (data) => {
     if (editGoal) {
       updateGoal(data, goalId, groupId);
-      setOpenGoalModal(false);
     } else {
       createGoal(data, groupId);
     }
+
+    setOpenGoalModal(false);
     reset();
   };
 
