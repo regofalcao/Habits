@@ -60,7 +60,7 @@ export const GoalsProvider = ({ children }) => {
 
   const updateGoal = (data, goalId, groupId) => {
     api
-      .patch(`/goals/:${goalId}/`, data, {
+      .patch(`/goals/${goalId}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

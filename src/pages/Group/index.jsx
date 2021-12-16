@@ -58,6 +58,7 @@ const Group = () => {
   const groupId = parseInt(id);
 
   const { name, creator, users_on_group } = groupInfo;
+  console.log(groupInfo);
 
   const {
     handleModal,
@@ -69,9 +70,9 @@ const Group = () => {
     modalOpen,
   } = useOpenModal();
 
-  const getGroupInfo = () => {
-    setGroupInfo(myGroupsList.find((group) => group.id === groupId));
-  };
+  // const getGroupInfo = () => {
+  //   setGroupInfo(myGroupsList.find((group) => group.id === groupId));
+  // };
 
   const exitDeleteButtonHandler = () => {
     unsubscribeToAgroup(groupId);
@@ -89,14 +90,11 @@ const Group = () => {
   }, []);
 
   useEffect(() => {
-    console.log(groupId);
-    console.log(goalsList);
     getGoals(groupId);
-    console.log(goalsList);
   }, []);
 
   useEffect(() => {
-    getGroupInfo();
+    setGroupInfo(myGroupsList.find((group) => group.id === groupId));
   }, [myGroupsList]);
 
   useEffect(() => {
@@ -138,7 +136,7 @@ const Group = () => {
             </ButtonExcludeExit>
           )}
         </TopContainer>
-        <h2>{name !== undefined ? name : "Nome do grupo"}</h2>
+        <h2>{name && name}</h2>
         <SectionContainer>
           <LeftSideContainer>
             <ActivitiesSection>
@@ -165,15 +163,17 @@ const Group = () => {
                 <AddButton onClick={() => handleModalButton("goal")} />
               </SectionTitle>
               <GoalCardDisplay>
-                {goalsList.map((goal) => (
-                  <CardGoal
-                    group={goal.group}
-                    title={goal.title}
-                    difficulty={goal.difficulty}
-                    how_much_achieved={goal.how_much_achieved}
-                    achieved={goal.achieved}
-                  />
-                ))}
+                {goalsList &&
+                  goalsList.map((goal) => (
+                    <CardGoal
+                      goalId={goal.id}
+                      group={goal.group}
+                      title={goal.title}
+                      difficulty={goal.difficulty}
+                      how_much_achieved={goal.how_much_achieved}
+                      achieved={goal.achieved}
+                    />
+                  ))}
               </GoalCardDisplay>
             </GoalsSection>
           </LeftSideContainer>

@@ -1,11 +1,13 @@
 import { Edit } from "@mui/icons-material";
 import { Container, Bar, ProgressBar, CheckinConteiner } from "./styles";
 import { useState } from "react";
+import { useGoals } from "../../providers/Goals";
 import api from "../../services/api";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const CardGoal = (item) => {
   const token = useState(JSON.parse(localStorage.getItem("token")) || "");
+  const { updateGoal } = useGoals();
 
   const style = {
     color: "#4348DE",
@@ -37,33 +39,45 @@ const CardGoal = (item) => {
     if (item.how_much_achieved + howMuch >= 100) {
       console.log("100%");
       item.how_much_achieved = 100;
-      api
-        .patch(
-          `/group/${item.group}`,
-          {
-            achieved: true,
-            how_much_achieved: 100,
-          },
-          {
-            Authorization: `Bearer ${token}`,
-          }
-        )
-        .then((response) => console.log(response));
+      const data = {
+        achieved: true,
+        how_much_achieved: 100,
+      };
+
+      updateGoal(data, item.goalId, item.group);
+      // api
+      //   .patch(
+      //     `/group/${item.group}/`,
+      //     {
+      //       achieved: true,
+      //       how_much_achieved: 100,
+      //     },
+      //     {
+      //       Authorization: `Bearer ${token}`,
+      //     }
+      //   )
+      //   .then((response) => console.log(response));
     }
     if (item.how_much_achieved + howMuch < 100) {
       console.log("ainda não");
       item.how_much_achieved = item.how_much_achieved + howMuch;
-      api
-        .patch(
-          `/group/${item.group}`,
-          {
-            how_much_achieved: item.how_much_achieved + howMuch,
-          },
-          {
-            Authorization: `Bearer ${token}`,
-          }
-        )
-        .then((response) => console.log(response));
+      const data = {
+        achieved: true,
+        how_much_achieved: item.how_much_achieved + howMuch,
+      };
+
+      updateGoal(data, item.goalId, item.group);
+      // api
+      //   .patch(
+      //     `/group/${item.group}/`,
+      //     {
+      //       how_much_achieved: item.how_much_achieved + howMuch,
+      //     },
+      //     {
+      //       Authorization: `Bearer ${token}`,
+      //     }
+      //   )
+      //   .then((response) => console.log(response));
     }
   };
   console.log(`alguma coius`);
@@ -74,13 +88,16 @@ const CardGoal = (item) => {
         <h3>{item.title}</h3>
         <Edit sx={style} onClick={handleButton} />
         <CheckinConteiner
-          category={item.category}
+          difficulty={item.difficulty}
           onClick={() => updateHowMuchAchieved(item)}
         >
           <CheckCircleIcon />
         </CheckinConteiner>
         <Bar>
-          <ProgressBar title={item.title} progress={item.how_much_achieved}>
+          <ProgressBar
+            difficulty={item.difficulty}
+            progress={item.how_much_achieved}
+          >
             <p>{item.how_much_achieved.toFixed()}%</p>
           </ProgressBar>
         </Bar>
