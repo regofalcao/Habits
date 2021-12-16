@@ -122,6 +122,8 @@ export const GroupsProvider = ({ children }) => {
   };
 
   const editerGroup = (data, groupId) => {
+    console.log("dados edição", data);
+    console.log("id grupo", groupId);
     api
       .patch(`/groups/${groupId}/`, data, {
         headers: {

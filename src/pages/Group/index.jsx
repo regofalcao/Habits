@@ -80,9 +80,9 @@ const Group = () => {
     getActivities(groupId);
   }, []);
 
-  useEffect(() => {
-    getGoals(groupId);
-  }, []);
+  // useEffect(() => {
+  //   getGoals(groupId);
+  // }, []);
 
   useEffect(() => {
     getGroupInfo();
