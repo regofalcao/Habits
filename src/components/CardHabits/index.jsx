@@ -44,6 +44,7 @@ const CardHabits = ({ habits, setEditiHabits, setOpemModal }) => {
       };
       updateHabit(data, item.id);
     }
+
     if (item.how_much_achieved + howMuch < 100) {
       const number = Math.round(item.how_much_achieved + howMuch);
       const data = {

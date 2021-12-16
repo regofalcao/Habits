@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -13,7 +14,6 @@ import {
   MembersSection,
   LeftSideContainer,
   MembersCardDisplay,
-  MetasDisplay,
   GoalCardDisplay,
 } from "./style";
 
@@ -43,14 +43,11 @@ const Group = () => {
   }, []);
 
   const history = useHistory();
-  const { myGroupsList, editGroup, unsubscribeToAgroup } = useGroups();
+  const { myGroupsList, unsubscribeToAgroup } = useGroups();
   const { goalsList, getGroupGoals } = useGoals();
   const { getActivities, activitiesList } = useActivities();
   const { user } = useUser();
   const { isOwner, setIsOwner } = useOpenSideBar();
-  const myGroupSubscriptions = JSON.parse(
-    localStorage.getItem("@kenzieHabits:groups")
-  );
 
   const [groupInfo, setGroupInfo] = useState({});
 
@@ -91,7 +88,6 @@ const Group = () => {
   useEffect(() => {
     setGroupInfo(myGroupsList.find((group) => group.id === groupId));
   }, [myGroupsList, goalsList]);
-  // console.log(groupInfo);
 
   useEffect(() => {
     creator && creator.id === user.id ? setIsOwner(true) : setIsOwner(false);
