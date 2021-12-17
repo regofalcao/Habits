@@ -48,12 +48,12 @@ const CardActivity = (props) => {
     <Container>
       <div>
         <h3>{props.title}</h3>
-        {isOwner && (
+        {
           <Delete
             sx={style}
             onClick={() => handleDeleteIcon(props.id, props.group)}
           />
-        )}
+        }
         <Edit sx={style} onClick={() => handleButton(props.id)} />
       </div>
       <span>{props.realization_time && formateTheDate()}</span>
