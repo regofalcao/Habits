@@ -54,12 +54,6 @@ const CardGroup = ({ group }) => {
           <CategoryCard category={category}>
             <h4>{category}</h4>
           </CategoryCard>
-          <EditIcon
-            onClick={(ev) => {
-              ev.stopPropagation();
-              handleEdit();
-            }}
-          />
         </section>
 
         <span>{description}</span>
